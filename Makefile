@@ -1,11 +1,12 @@
 # Compiler and flags
-CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CC = gcc
+CFLAGS =
 
 # Directories
 SRC_DIR = ./utils
 OBJ_DIR = ./obj
 LIBFT_DIR = ./libft
+MLX_DIR = ./mlx42
 
 # Libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -20,18 +21,22 @@ NAME = so_long
 # Default rule
 all: $(LIBFT) $(NAME)
 
-# Rule to make the program
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIBFT_DIR) -lft
-
-# Generic rule for objects
+# Compilation process - 2st stage of the build process
 $(OBJ_DIR)/%.o: %.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Libft compilation rule
+# Rule to create the executable - last step
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIBFT_DIR) -lft -L$(MLX_DIR)/build -lmlx42 -Iinclude -ldl -lglfw -pthread -lm
+
+# Libft build process - call makefile to build a static Libft library
 $(LIBFT):
 	make -C $(LIBFT_DIR)
+
+# MLX42 build process - call makefile to build a static MLX42 library
+$(MLX42):
+	make -C $(MLX_DIR)
 
 # Clean rule
 clean:
