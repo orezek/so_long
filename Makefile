@@ -10,6 +10,7 @@ MLX_DIR = ./mlx42
 
 # Libft
 LIBFT = $(LIBFT_DIR)/libft.a
+MLX42 = $(MLX_DIR)/build/libmlx42.a
 
 # Source and object files
 SRCS = $(wildcard $(SRC_DIR)/*.c) $(wildcard ./*.c)
@@ -18,15 +19,16 @@ OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
 # Program name
 NAME = so_long
 
-# Default rule
-all: $(LIBFT) $(NAME)
+# Default rule to build the default target - the variables are its dependencies which must be build befor anything else
+# if not yet build the Make program will move to find the dependencies and build them one by one
+all: $(LIBFT) $(MLX42) $(NAME)
 
-# Compilation process - 2st stage of the build process
+# Compilation process - 2st stage of the build process - build obj. files
 $(OBJ_DIR)/%.o: %.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Rule to create the executable - last step
+# Rule to create the executable - last step - linking process
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L$(LIBFT_DIR) -lft -L$(MLX_DIR)/build -lmlx42 -Iinclude -ldl -lglfw -pthread -lm
 
