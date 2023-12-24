@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2023/12/20 21:15:05 by orezek           ###   ########.fr       */
+/*   Updated: 2023/12/24 22:16:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@ int32_t main(int32_t argc, const char* argv[])
 {
 	#define WIDTH 1024
 	#define HEIGHT 1024
-
 	mlx_t*	mlx; // mlx data structure (window, context, width, height, delta_time)
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-	//mlx_set_setting(MLX_MAXIMIZED, 1);
+	mlx_set_setting(MLX_MAXIMIZED, 1);
+	mlx_set_setting(MLX_DECORATED, 1);
+	mlx_set_setting(MLX_SETTINGS_MAX, 1);
 
 	//to get the size of the window - does not work
 	int32_t	width;
 	int32_t	height;
-	mlx_get_monitor_size(1, &width, &height);
+	width = 0;
+	height = 0;
+	mlx_get_monitor_size(0, &width, &height);
 	ft_printf("width: %d, height: %d\n", width, height);
 	//
 	if (!(mlx = mlx_init(WIDTH, HEIGHT, "SO_LONG", true))) // window size x,y, title, window resizable
@@ -51,24 +54,38 @@ int32_t main(int32_t argc, const char* argv[])
 
 
 	static mlx_texture_t *texture; // A texture object loaded from a disk
-	static mlx_image_t* image; // An image struct/object with an individual buffer that can be rendered.
+	static mlx_image_t *image; // An image struct/object with an individual buffer that can be rendered.
 
-	texture = mlx_load_png("./asset.png");
+	mlx_texture_t *texture1;
+	mlx_image_t *image1;
+	// map generator test
+	char	**map;
+	map = generate_map();
+	print_map(map);
+
+	texture = mlx_load_png("./assets/wall.png");
+	texture1 = mlx_load_png("./assets/wall.png");
 	image = mlx_texture_to_image(mlx, texture);
-	mlx_resize_image(image, 64, 64);
+	image1 = mlx_texture_to_image(mlx, texture1);
+	mlx_resize_image(image, 128, 128);
+	mlx_resize_image(image1, 128, 128);
 
 	mlx_delete_texture(texture); // cleanup
+	mlx_delete_texture(texture1);
 	// mlx_image_to_window(mlx, image, 0, 0);
 	// mlx_image_to_window(mlx, image, 0, 64);
 	int x;
 	int y;
 	y = 0;
-	while (y < 32)
+	while (y < 16)
 	{
 		x = 0;
-		while (x < 32)
+		while (x < 16)
 			{
-				mlx_image_to_window(mlx, image, y * 64, x * 64);
+				if (y % 2 == 0)
+					mlx_image_to_window(mlx, image, y * 64, x * 64);
+				else
+					mlx_image_to_window(mlx, image1, y * 64, x * 64);
 				x++;
 			}
 		y++;
