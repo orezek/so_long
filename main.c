@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2023/12/24 22:16:55 by orezek           ###   ########.fr       */
+/*   Updated: 2023/12/31 11:35:53 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,73 +24,52 @@ int32_t main(int32_t argc, const char* argv[])
 {
 	#define WIDTH 1024
 	#define HEIGHT 1024
-	mlx_t*	mlx; // mlx data structure (window, context, width, height, delta_time)
-	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-	mlx_set_setting(MLX_MAXIMIZED, 1);
-	mlx_set_setting(MLX_DECORATED, 1);
-	mlx_set_setting(MLX_SETTINGS_MAX, 1);
-
-	//to get the size of the window - does not work
+	t_game_textures	*game_textures;
+	t_game_assets	*game_assets;
+	t_elem_size		element_size;
+	t_map_size		*map_size;
 	int32_t	width;
 	int32_t	height;
-	width = 0;
-	height = 0;
-	mlx_get_monitor_size(0, &width, &height);
-	ft_printf("width: %d, height: %d\n", width, height);
-	//
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "SO_LONG", true))) // window size x,y, title, window resizable
+
+	mlx_t*	mlx; // mlx data structure (window, context, width, height, delta_time)
+	//mlx_set_setting(MLX_STRETCH_IMAGE, 1);
+	//mlx_set_setting(MLX_MAXIMIZED, 1);
+	//mlx_set_setting(MLX_DECORATED, 1);
+	//mlx_set_setting(MLX_SETTINGS_MAX, 1);
+
+	if (!(mlx = mlx_init(10, 10, "SO_LONG", true))) // window size x,y, title, window resizable
 	{
 		return(EXIT_FAILURE); //stdlib macro 1
 	}
+	// gets monitor size
+	mlx_get_monitor_size(0, &width, &height);
+	mlx_set_window_size(mlx, width, height);
+	ft_putnbr_fd(width, 1);
+	ft_putchar_fd('\n', 1);
+	ft_putnbr_fd(height, 1);
+	ft_putchar_fd('\n', 1);
+	// load png files for the whole game
+	game_textures = ft_load_textures();
+	// load images from textures
+	game_assets = ft_load_images(mlx, game_textures);
+	// delete textures
+	ft_del_textures(game_textures);
 
-
-	// How to create an image form png or any other format and display it on the creen by using MLX?
-
-	// Worfklow -> Load texture by mlx_load_png(const char* path) into a mlx_texture_t object
-	// -> Convert the texture obj by mlx_texture_to_image(mlx_t* mlx, mlx_texture_t* texture) into mlx_image_t obj
-	// delete the texture object by void mlx_delete_texture(mlx_texture_t* texture)
-	// -> Use some FUNC to display the image on the screen! int32_t mlx_image_to_window(mlx_t* mlx, mlx_image_t* img, int32_t x, int32_t y)
-
-
-
-	static mlx_texture_t *texture; // A texture object loaded from a disk
-	static mlx_image_t *image; // An image struct/object with an individual buffer that can be rendered.
-
-	mlx_texture_t *texture1;
-	mlx_image_t *image1;
 	// map generator test
 	char	**map;
-	map = generate_map();
-	print_map(map);
+	map = ft_generate_map(10, 8);
+	//ft_print_map(map);
+	//TODO Write func to calculate map sizes
+	map_size->width = 10;
+	map_size->height = 8;
+	element_size = ft_cal_elem_size(map_size);
+	ft_resize_assets(game_assets, element_size.width, element_size.height);
+	printf("%f\n", element_size.width);
+	printf("%f\n", element_size.height);
 
-	texture = mlx_load_png("./assets/wall.png");
-	texture1 = mlx_load_png("./assets/wall.png");
-	image = mlx_texture_to_image(mlx, texture);
-	image1 = mlx_texture_to_image(mlx, texture1);
-	mlx_resize_image(image, 128, 128);
-	mlx_resize_image(image1, 128, 128);
-
-	mlx_delete_texture(texture); // cleanup
-	mlx_delete_texture(texture1);
-	// mlx_image_to_window(mlx, image, 0, 0);
-	// mlx_image_to_window(mlx, image, 0, 64);
-	int x;
-	int y;
-	y = 0;
-	while (y < 16)
-	{
-		x = 0;
-		while (x < 16)
-			{
-				if (y % 2 == 0)
-					mlx_image_to_window(mlx, image, y * 64, x * 64);
-				else
-					mlx_image_to_window(mlx, image1, y * 64, x * 64);
-				x++;
-			}
-		y++;
-	}
-	ft_printf("%d\n", image->count);
+	mlx_image_to_window(mlx, game_assets->space, 0, 0);
+	ft_add_graph_elm(map, game_assets, mlx, element_size);
+	mlx_set_window_title(mlx, "Game of Hearts");
 	mlx_loop(mlx); // keeps the window being rendered
 	mlx_terminate(mlx); // terminates mlx and cleans up the rosources
 	return (EXIT_SUCCESS); // stdlib macro 0
