@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2023/12/30 19:40:13 by orezek           ###   ########.fr       */
+/*   Updated: 2023/12/31 16:04:32 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,5 @@ void				ft_resize_assets(t_game_assets *game_assets, size_t x, size_t y);
 t_game_textures		*ft_load_textures(void);
 void				ft_del_textures(t_game_textures *game_textures);
 t_elem_size			ft_cal_elem_size(t_map_size *map_size);
+t_map_size			*ft_get_map_size(char **map);
 #endif
