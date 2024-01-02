@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2023/12/31 11:35:53 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/01 21:13:30 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,18 @@ int32_t main(int32_t argc, const char* argv[])
 
 	// map generator test
 	char	**map;
-	map = ft_generate_map(10, 8);
+	map = ft_generate_map(120, 110);
 	//ft_print_map(map);
 	//TODO Write func to calculate map sizes
-	map_size->width = 10;
-	map_size->height = 8;
+	// map_size->width = 120;
+	// map_size->height = 110;
+	map_size = ft_get_map_size(map);
 	element_size = ft_cal_elem_size(map_size);
 	ft_resize_assets(game_assets, element_size.width, element_size.height);
 	printf("%f\n", element_size.width);
 	printf("%f\n", element_size.height);
-
+	printf("map_size_w: %d\n", map_size->width);
+	printf("maps_size_h: %d\n", map_size->height);
 	mlx_image_to_window(mlx, game_assets->space, 0, 0);
 	ft_add_graph_elm(map, game_assets, mlx, element_size);
 	mlx_set_window_title(mlx, "Game of Hearts");

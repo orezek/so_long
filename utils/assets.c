@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:40:49 by orezek            #+#    #+#             */
-/*   Updated: 2023/12/28 19:46:08 by orezek           ###   ########.fr       */
+/*   Updated: 2023/12/31 11:55:57 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ t_game_assets	*ft_load_images(mlx_t *mlx, t_game_textures *game_textures)
 
 void ft_resize_assets(t_game_assets *game_assets, size_t x, size_t y)
 {
-	mlx_resize_image(game_assets->player, y, x);
-	mlx_resize_image(game_assets->collectible, y, x);
-	mlx_resize_image(game_assets->wall, y, x);
-	mlx_resize_image(game_assets->exit, y, x);
+	mlx_resize_image(game_assets->player, x, y);
+	mlx_resize_image(game_assets->collectible, x, y);
+	mlx_resize_image(game_assets->wall, x, y);
+	mlx_resize_image(game_assets->exit, x, y);
 }
 
 void ft_del_textures(t_game_textures *game_textures)
