@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2023/12/31 11:44:47 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/01 21:42:42 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_elem
 		while(**map)
 		{
 			if (**map == '1')
-				mlx_image_to_window(mlx, game_assets->wall, x * elem_size.width, y * elem_size.height);
+				mlx_image_to_window(mlx, game_assets->wall, (double) x * elem_size.width, (double) y * elem_size.height);
 			// else if (**map == 'P')
 			// 	mlx_image_to_window(mlx, game_assets->player, x * elem_size.width, y * elem_size.height);
 			// else if (**map == 'E')
@@ -77,7 +77,7 @@ void	ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_elem
 		map++;
 		y++;
 	}
-	ft_printf("x: %d\ny: %d\n", x, y);
+	//ft_printf("x: %d\ny: %d\n", x, y);
 }
 
 
@@ -105,6 +105,32 @@ t_elem_size	ft_cal_elem_size(t_map_size *map_size)
 	elem_size.width = (double) display_size->width / map_size->width;
 	elem_size.height = (double) display_size->height / map_size->height;
 	return (elem_size);
+}
+
+
+t_map_size *ft_get_map_size(char **map)
+{
+	t_map_size	*map_size;
+	int			x;
+	int			y;
+
+	map_size = malloc(sizeof(map_size));
+	y = 0;
+	while (*map)
+	{
+		x = 0;
+		while (**map)
+		{
+			x++;
+			(*map)++;
+		}
+		y++;
+		map++;
+	}
+	map_size->width = x;
+	map_size->height = y;
+
+	return (map_size);
 }
 // mam velikost displeje x, y
 // mam velikost mapy pocet x, y
