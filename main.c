@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/01 21:13:30 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/03 19:24:45 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int32_t main(int32_t argc, const char* argv[])
 
 	// map generator test
 	char	**map;
-	map = ft_generate_map(120, 110);
+	char	**m_map;
+	map = ft_generate_map(20, 12);
 	//ft_print_map(map);
 	//TODO Write func to calculate map sizes
 	// map_size->width = 120;

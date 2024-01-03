@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/01 21:42:42 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/03 19:29:19 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ char	**ft_generate_map(int width, int height)
 
 void	ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_elem_size elem_size)
 {
+	t_map_size	*map_size;
 	int	x;
 	int	y;
 
+	map_size = ft_get_map_size(map);
 	y = 0;
 	//height from top to buttom
 	while (*map)
@@ -111,25 +113,33 @@ t_elem_size	ft_cal_elem_size(t_map_size *map_size)
 t_map_size *ft_get_map_size(char **map)
 {
 	t_map_size	*map_size;
+	char		**temp_map;
+	char		*temp_row;
 	int			x;
 	int			y;
 
-	map_size = malloc(sizeof(map_size));
+	temp_map = map;
+	map_size = malloc(sizeof(t_map_size));
+	if (!map_size)
+		return (NULL);
 	y = 0;
-	while (*map)
+	while (*temp_map)
 	{
-		x = 0;
-		while (**map)
+		if (y == 0)
 		{
-			x++;
-			(*map)++;
+			x = 0;
+			temp_row = *temp_map;
+			while (*temp_row)
+			{
+				x++;
+				temp_row++;
+			}
 		}
 		y++;
-		map++;
+		temp_map++;
 	}
 	map_size->width = x;
 	map_size->height = y;
-
 	return (map_size);
 }
 // mam velikost displeje x, y
