@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/03 19:24:45 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/04 08:11:12 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int32_t main(int32_t argc, const char* argv[])
 	// gets monitor size
 	mlx_get_monitor_size(0, &width, &height);
 	mlx_set_window_size(mlx, width, height);
+	mlx_set_window_size(mlx, 1680, 1050);
 	ft_putnbr_fd(width, 1);
 	ft_putchar_fd('\n', 1);
 	ft_putnbr_fd(height, 1);
@@ -58,12 +59,14 @@ int32_t main(int32_t argc, const char* argv[])
 	// map generator test
 	char	**map;
 	char	**m_map;
-	map = ft_generate_map(20, 12);
+	map = ft_generate_map(20, 15);
 	//ft_print_map(map);
 	//TODO Write func to calculate map sizes
 	// map_size->width = 120;
 	// map_size->height = 110;
 	map_size = ft_get_map_size(map);
+	// map_size->height += 1;
+	// map_size->width += 1;
 	element_size = ft_cal_elem_size(map_size);
 	ft_resize_assets(game_assets, element_size.width, element_size.height);
 	printf("%f\n", element_size.width);

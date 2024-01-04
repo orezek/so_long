@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/03 19:29:19 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/04 08:12:10 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,24 @@ void	ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_elem
 	map_size = ft_get_map_size(map);
 	y = 0;
 	//height from top to buttom
-	while (*map)
+	while (y < map_size->height)
 	{
 		x = 0;
 		//width = from left to right
-		while(**map)
+		while(x < map_size->width)
 		{
-			if (**map == '1')
-				mlx_image_to_window(mlx, game_assets->wall, (double) x * elem_size.width, (double) y * elem_size.height);
-			// else if (**map == 'P')
-			// 	mlx_image_to_window(mlx, game_assets->player, x * elem_size.width, y * elem_size.height);
-			// else if (**map == 'E')
-			// 	mlx_image_to_window(mlx, game_assets->exit, x * elem_size.width, y * elem_size.height);
-			// else if (**map == 'C')
-			// 	mlx_image_to_window(mlx, game_assets->collectible, x * elem_size.width, y * elem_size.height);
-			(*map)++;
+			if (map[y][x] == '1')
+				mlx_image_to_window(mlx, game_assets->wall, x * elem_size.width, y * elem_size.height);
+			else if (map[y][x] == 'P')
+				mlx_image_to_window(mlx, game_assets->player, x * elem_size.width, y * elem_size.height);
+			else if (map[y][x]== 'E')
+				mlx_image_to_window(mlx, game_assets->exit, x * elem_size.width, y * elem_size.height);
+			else if (map[y][x] == 'C')
+				mlx_image_to_window(mlx, game_assets->collectible, x * elem_size.width, y * elem_size.height);
+			//(*map)++;
 			x++;
 		}
-		map++;
+		//map++;
 		y++;
 	}
 	//ft_printf("x: %d\ny: %d\n", x, y);
@@ -104,8 +104,10 @@ t_elem_size	ft_cal_elem_size(t_map_size *map_size)
 
 	display_size = malloc(sizeof(display_size));
 	mlx_get_monitor_size(0, &display_size->width, &display_size->height);
-	elem_size.width = (double) display_size->width / map_size->width;
-	elem_size.height = (double) display_size->height / map_size->height;
+	// elem_size.width = (double) display_size->width / map_size->width;
+	// elem_size.height = (double) display_size->height / map_size->height;
+	elem_size.width = (double) 1680 / map_size->width;
+	elem_size.height = (double) 1050 / map_size->height;
 	return (elem_size);
 }
 
