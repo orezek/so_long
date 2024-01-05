@@ -6,12 +6,12 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/04 08:12:10 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/05 09:25:36 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-// x is height = collumn y is row
+
 char	**ft_generate_map(int width, int height)
 {
 	char	**game_map;
@@ -37,8 +37,6 @@ char	**ft_generate_map(int width, int height)
 				game_map[x][y] = 'C';
 			else if (y == 0 || y < width && x < 1 || x < height && y == width - 1 || x == height - 1)
 				game_map[x][y] = '1';
-			// else if (x == height - 1)
-			// 	game_map[x][y] = 'X';
 			else
 				game_map[x][y] = '0';
 			y++;
@@ -73,13 +71,10 @@ void	ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_elem
 				mlx_image_to_window(mlx, game_assets->exit, x * elem_size.width, y * elem_size.height);
 			else if (map[y][x] == 'C')
 				mlx_image_to_window(mlx, game_assets->collectible, x * elem_size.width, y * elem_size.height);
-			//(*map)++;
 			x++;
 		}
-		//map++;
 		y++;
 	}
-	//ft_printf("x: %d\ny: %d\n", x, y);
 }
 
 
@@ -144,7 +139,15 @@ t_map_size *ft_get_map_size(char **map)
 	map_size->height = y;
 	return (map_size);
 }
-// mam velikost displeje x, y
-// mam velikost mapy pocet x, y
-// potrebuji vypocitat velikost elementu tak abych element x * mapa x == displeje
-// dx = 1680 (width), mx 10, ex x, double dx/mx = ex
+// loads the map string into 2d array for further processing
+char	**ft_load_map(char *map_string)
+{
+	;
+}
+
+// loads the file into a long string
+char	*ft_load_map_file(char *path)
+{
+	;
+}
+
