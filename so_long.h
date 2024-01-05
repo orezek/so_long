@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2023/12/31 16:04:32 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/05 09:10:07 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define EXIT "./assets/exit.png"
 # define COLLECTABLE "./assets/collectable.png"
 
+// default window size
+#define WIDTH 1680
+#define HEIGHT 1050
 
 typedef struct game_assets_s
 {
@@ -64,7 +67,7 @@ void				ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_e
 char				**ft_generate_map(int height, int width);
 void				ft_print_map(char **map);
 t_game_assets		*ft_load_images(mlx_t *mlx, t_game_textures *game_textures);
-void				ft_resize_assets(t_game_assets *game_assets, size_t x, size_t y);
+void				ft_resize_assets(t_game_assets *game_assets, t_elem_size elem_size);
 t_game_textures		*ft_load_textures(void);
 void				ft_del_textures(t_game_textures *game_textures);
 t_elem_size			ft_cal_elem_size(t_map_size *map_size);
