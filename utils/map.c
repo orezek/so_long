@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/07 11:24:59 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 11:38:33 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,13 @@ char	**ft_load_map(char *map_path)
 		tmp_ptr = map_str;
 		map_str = ft_strjoin(tmp_ptr, line);
 		if (!map_str)
-			return (perror("Map lines error"), NULL);
+			return (free(line), free(tmp_ptr), perror("Map lines error"), NULL);
 		free(line);
 		free(tmp_ptr);
 	}
 	map = ft_split(map_str, '\n');
+	free(map_str);
+	close(fd);
 	return (map);
 }
 
