@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 08:09:21 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 08:25:50 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int32_t main(int32_t argc, const char* argv[])
 	t_game_images	*game_images;
 	t_elem_size		*element_size;
 	t_map_size		*map_size;
+	char			**map;
+	map = NULL;
 	int32_t	width;
 	int32_t	height;
 
@@ -45,10 +47,10 @@ int32_t main(int32_t argc, const char* argv[])
 	mlx_set_window_size(mlx, 1680, 1050);
 	game_images = ft_load_graphics(mlx);
 	// generate map
-	char	**map;
-	map = ft_generate_map(20, 15);
+	map = ft_load_map("./map.ber");
 	map_size = ft_get_map_size(map);
-	
+	ft_printf("%d\n%d\n",map_size->width, map_size->height);
+	//ft_print_map(map);
 	element_size = ft_cal_elem_size(map_size);
 	ft_resize_assets(game_images, element_size);
 	mlx_image_to_window(mlx, game_images->space, 0, 0);
