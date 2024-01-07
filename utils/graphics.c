@@ -6,10 +6,14 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:19:20 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/05 09:19:53 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/05 22:38:41 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../so_long.h"
 
 
+void ft_get_aspect_ratio(void)
+{
+	;
+}

@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/05 09:25:36 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/06 20:31:16 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**ft_generate_map(int width, int height)
 	return (game_map);
 }
 
-void	ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_elem_size elem_size)
+void	ft_add_graph_elm(char **map, t_game_images *game_images, mlx_t *mlx, t_elem_size *elem_size)
 {
 	t_map_size	*map_size;
 	int	x;
@@ -64,13 +64,13 @@ void	ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_elem
 		while(x < map_size->width)
 		{
 			if (map[y][x] == '1')
-				mlx_image_to_window(mlx, game_assets->wall, x * elem_size.width, y * elem_size.height);
+				mlx_image_to_window(mlx, game_images->wall, x * elem_size->width, y * elem_size->height);
 			else if (map[y][x] == 'P')
-				mlx_image_to_window(mlx, game_assets->player, x * elem_size.width, y * elem_size.height);
+				mlx_image_to_window(mlx, game_images->player, x * elem_size->width, y * elem_size->height);
 			else if (map[y][x]== 'E')
-				mlx_image_to_window(mlx, game_assets->exit, x * elem_size.width, y * elem_size.height);
+				mlx_image_to_window(mlx, game_images->exit, x * elem_size->width, y * elem_size->height);
 			else if (map[y][x] == 'C')
-				mlx_image_to_window(mlx, game_assets->collectible, x * elem_size.width, y * elem_size.height);
+				mlx_image_to_window(mlx, game_images->collectible, x * elem_size->width, y * elem_size->height);
 			x++;
 		}
 		y++;
@@ -92,17 +92,18 @@ void	ft_print_map(char **map)
 	}
 }
 
-t_elem_size	ft_cal_elem_size(t_map_size *map_size)
+t_elem_size	*ft_cal_elem_size(t_map_size *map_size)
 {
-	t_elem_size 	elem_size;
+	t_elem_size 	*elem_size;
 	t_display_size	*display_size;
 
-	display_size = malloc(sizeof(display_size));
+	display_size = malloc(sizeof(t_display_size));
+	elem_size = malloc(sizeof(t_elem_size));
 	mlx_get_monitor_size(0, &display_size->width, &display_size->height);
 	// elem_size.width = (double) display_size->width / map_size->width;
 	// elem_size.height = (double) display_size->height / map_size->height;
-	elem_size.width = (double) 1680 / map_size->width;
-	elem_size.height = (double) 1050 / map_size->height;
+	elem_size->width =  1680/ map_size->width;
+	elem_size->height = 1050 / map_size->height;
 	return (elem_size);
 }
 
@@ -140,14 +141,33 @@ t_map_size *ft_get_map_size(char **map)
 	return (map_size);
 }
 // loads the map string into 2d array for further processing
-char	**ft_load_map(char *map_string)
+char	**ft_load_map(char *map_path)
 {
-	;
-}
+	int		fd;
+	char	*line;
+	char	*map_str;
+	char	*tmp_ptr;
+	char	**map;
 
-// loads the file into a long string
-char	*ft_load_map_file(char *path)
-{
-	;
+	map = NULL;
+	line = NULL;
+	tmp_ptr = NULL;
+	map_str = malloc(sizeof(char *));
+	if(!map_str)
+		return (perror("Map str malloc failed"), NULL);
+	fd = open(map_path, O_RDONLY, 0444);
+	if (fd == -1)
+		return (perror("Map reading failed"), NULL);
+	while(line = ft_get_next_line(fd))
+	{
+		tmp_ptr = map_str;
+		map_str = ft_strjoin(map_str, line);
+		if (!map_str)
+			return (perror("Map lines error"), NULL);
+		free(line);
+		free(tmp_ptr);
+	}
+	map = ft_split(map_str, '\n');
+	return (map);
 }
 

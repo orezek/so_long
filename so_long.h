@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/05 09:10:07 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/06 09:14:24 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 # include "libft/libft.h"
 # include "mlx42/include/MLX42/MLX42.h"
+# include <fcntl.h>
 
 // PNG assets
 # define WALL "./assets/wall.png"
@@ -26,7 +27,7 @@
 #define WIDTH 1680
 #define HEIGHT 1050
 
-typedef struct game_assets_s
+typedef struct game_images_s
 {
 	mlx_image_t	*wall;
 	mlx_image_t	*player;
@@ -34,7 +35,7 @@ typedef struct game_assets_s
 	mlx_image_t	*exit;
 	mlx_image_t	*space;
 
-}	t_game_assets;
+}	t_game_images;
 
 typedef struct game_textures_s
 {
@@ -63,13 +64,22 @@ typedef struct display_size_s
 	int32_t	height;
 }	t_display_size;
 
-void				ft_add_graph_elm(char **map, t_game_assets *game_assets, mlx_t *mlx, t_elem_size elem_size);
+typedef struct game_dimensions_s
+{
+	t_display_size	*display_size;
+	t_map_size		*map_size;
+	t_elem_size		*element_size;
+}	t_game_dimensions;
+
+
+void				ft_add_graph_elm(char **map, t_game_images *game_images, mlx_t *mlx, t_elem_size *elem_size);
 char				**ft_generate_map(int height, int width);
 void				ft_print_map(char **map);
-t_game_assets		*ft_load_images(mlx_t *mlx, t_game_textures *game_textures);
-void				ft_resize_assets(t_game_assets *game_assets, t_elem_size elem_size);
+t_game_images		*ft_load_images(mlx_t *mlx, t_game_textures *game_textures);
+void				ft_resize_assets(t_game_images *game_images, t_elem_size *elem_size);
 t_game_textures		*ft_load_textures(void);
 void				ft_del_textures(t_game_textures *game_textures);
-t_elem_size			ft_cal_elem_size(t_map_size *map_size);
+t_elem_size			*ft_cal_elem_size(t_map_size *map_size);
 t_map_size			*ft_get_map_size(char **map);
+char				**ft_load_map(char *map_path);
 #endif

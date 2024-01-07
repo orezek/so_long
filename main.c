@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/05 09:09:57 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 08:00:38 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int32_t main(int32_t argc, const char* argv[])
 {
 
 	t_game_textures	*game_textures;
-	t_game_assets	*game_assets;
-	t_elem_size		element_size;
+	t_game_images	*game_assets;
+	t_elem_size		*element_size;
 	t_map_size		*map_size;
 	int32_t	width;
 	int32_t	height;
