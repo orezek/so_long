@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/06 09:14:24 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 08:08:31 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void				ft_del_textures(t_game_textures *game_textures);
 t_elem_size			*ft_cal_elem_size(t_map_size *map_size);
 t_map_size			*ft_get_map_size(char **map);
 char				**ft_load_map(char *map_path);
+t_game_images		*ft_load_graphics(mlx_t *mlx);
 #endif
