@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 08:08:31 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 09:22:09 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct game_dimensions_s
 }	t_game_dimensions;
 
 
-void				ft_add_graph_elm(char **map, t_game_images *game_images, mlx_t *mlx, t_elem_size *elem_size);
+void				ft_add_graph_elm(mlx_t *mlx, char **map);
 char				**ft_generate_map(int height, int width);
 void				ft_print_map(char **map);
 t_game_images		*ft_load_images(mlx_t *mlx, t_game_textures *game_textures);
