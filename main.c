@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 08:00:38 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 08:09:21 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 int32_t main(int32_t argc, const char* argv[])
 {
 
-	t_game_textures	*game_textures;
-	t_game_images	*game_assets;
+	t_game_images	*game_images;
 	t_elem_size		*element_size;
 	t_map_size		*map_size;
 	int32_t	width;
@@ -44,20 +43,16 @@ int32_t main(int32_t argc, const char* argv[])
 	mlx_get_monitor_size(0, &width, &height);
 	// mlx_set_window_size(mlx, width, height);
 	mlx_set_window_size(mlx, 1680, 1050);
-	// load png files for the whole game
-	game_textures = ft_load_textures();
-	// load images from textures
-	game_assets = ft_load_images(mlx, game_textures);
-	// delete textures
-	ft_del_textures(game_textures);
+	game_images = ft_load_graphics(mlx);
 	// generate map
 	char	**map;
 	map = ft_generate_map(20, 15);
 	map_size = ft_get_map_size(map);
+	
 	element_size = ft_cal_elem_size(map_size);
-	ft_resize_assets(game_assets, element_size);
-	mlx_image_to_window(mlx, game_assets->space, 0, 0);
-	ft_add_graph_elm(map, game_assets, mlx, element_size);
+	ft_resize_assets(game_images, element_size);
+	mlx_image_to_window(mlx, game_images->space, 0, 0);
+	ft_add_graph_elm(map, game_images, mlx, element_size);
 	mlx_set_window_title(mlx, "Game of Hearts");
 	mlx_loop(mlx); // keeps the window being rendered
 	mlx_terminate(mlx); // terminates mlx and cleans up the rosources
