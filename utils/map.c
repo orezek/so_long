@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/07 08:43:54 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 09:13:23 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	ft_add_graph_elm(char **map, t_game_images *game_images, mlx_t *mlx, t_elem
 
 	map_size = ft_get_map_size(map);
 	y = 0;
+	mlx_image_to_window(mlx, game_images->space, 0, 0);
+	ft_resize_assets(game_images, elem_size);
 	//height from top to buttom
 	while (y < map_size->height)
 	{
