@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 11:30:25 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 17:09:42 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,20 @@ mlx_t	*ft_game_init(char **map)
 	mlx_set_window_size(mlx, element_size->width * map_size->width,
 		element_size->height * map_size->height);
 	mlx_set_window_title(mlx, "Game of Hearts");
-	return (mlx);
+	return (free(map_size), free(element_size), mlx);
+}
+
+int	ft_free_array(char **array)
+{
+	char	**tmp_ptr;
+
+	tmp_ptr = array;
+	while (*array != NULL)
+	{
+		free(*array);
+		array++;
+	}
+	free(tmp_ptr);
 }
 
 /*TODO
@@ -39,13 +52,14 @@ mlx_t	*ft_game_init(char **map)
 */
 int32_t	main(int32_t argc, const char *argv[])
 {
-	mlx_t			*mlx;
-	char			**map;
+	mlx_t	*mlx;
+	char	**map;
 
 	map = ft_load_map("./map.ber");
 	mlx = ft_game_init(map);
 	ft_add_graph_elm(mlx, map);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	ft_free_array(map);
 	return (EXIT_SUCCESS);
 }
