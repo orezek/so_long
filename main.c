@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 17:32:26 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 17:35:58 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	mlx = ft_game_init(map);
 	ft_add_graph_elm(mlx, map);
 	mlx_loop(mlx);
+	mlx_close_window(mlx);
 	mlx_terminate(mlx);
 	ft_free_array(map);
 	return (EXIT_SUCCESS);
