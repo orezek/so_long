@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 08:51:55 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 09:06:24 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,13 @@ int32_t main(int32_t argc, const char* argv[])
 	t_map_size		*map_size;
 	char			**map;
 	map = NULL;
-	int32_t	width;
-	int32_t	height;
 
 	mlx_t*	mlx; // mlx data structure (window, context, width, height, delta_time)
-	//mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-	//mlx_set_setting(MLX_MAXIMIZED, 1);
-	//mlx_set_setting(MLX_DECORATED, 1);
-	//mlx_set_setting(MLX_SETTINGS_MAX, 1);
 
 	if (!(mlx = mlx_init(1,1, "SO_LONG", true))) // window size x,y, title, window resizable
 	{
 		return(EXIT_FAILURE); //stdlib macro 1
 	}
-	// gets monitor size
-	mlx_get_monitor_size(0, &width, &height);
-	// mlx_set_window_size(mlx, width, height);
-	mlx_set_window_size(mlx, 1680, 1050);
 	game_images = ft_load_graphics(mlx);
 	// generate map
 	map = ft_load_map("./map.ber");
