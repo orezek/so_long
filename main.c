@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 09:22:16 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 09:25:39 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 
 int32_t main(int32_t argc, const char* argv[])
 {
-
-	t_game_images	*game_images;
 	t_elem_size		*element_size;
 	t_map_size		*map_size;
 	char			**map;
@@ -35,7 +33,6 @@ int32_t main(int32_t argc, const char* argv[])
 	{
 		return(EXIT_FAILURE); //stdlib macro 1
 	}
-	game_images = ft_load_graphics(mlx);
 	map = ft_load_map("./map.ber");
 	map_size = ft_get_map_size(map);
 	ft_printf("%d\n%d\n",map_size->width, map_size->height);
