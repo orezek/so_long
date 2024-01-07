@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 09:11:20 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 09:22:16 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int32_t main(int32_t argc, const char* argv[])
 	map_size = ft_get_map_size(map);
 	ft_printf("%d\n%d\n",map_size->width, map_size->height);
 	element_size = ft_cal_elem_size(map_size);
-	ft_add_graph_elm(map, game_images, mlx, element_size);
+	ft_add_graph_elm(mlx, map);
 	mlx_set_window_size(mlx, element_size->width * map_size->width, element_size->height * map_size->height);
 	mlx_set_window_title(mlx, "Game of Hearts");
 	mlx_loop(mlx); // keeps the window being rendered
