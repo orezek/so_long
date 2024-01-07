@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:31:52 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/07 17:32:28 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 17:37:19 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ int	ft_free_array(char **array)
 		array++;
 	}
 	free(tmp_ptr);
+	return (0);
 }

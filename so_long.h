@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 10:54:15 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 17:37:07 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ t_map_size			*ft_get_map_size(char **map);
 char				**ft_load_map(char *map_path);
 t_game_images		*ft_load_graphics(mlx_t *mlx);
 mlx_t				*ft_game_init(char **map);
+int					ft_free_array(char **array);
 #endif
