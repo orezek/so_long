@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/06 20:31:16 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 08:43:54 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ char	**ft_load_map(char *map_path)
 	line = NULL;
 	tmp_ptr = NULL;
 	map_str = malloc(sizeof(char *));
+	map_str[0] = '\0';
 	if(!map_str)
 		return (perror("Map str malloc failed"), NULL);
 	fd = open(map_path, O_RDONLY, 0444);
@@ -161,7 +162,7 @@ char	**ft_load_map(char *map_path)
 	while(line = ft_get_next_line(fd))
 	{
 		tmp_ptr = map_str;
-		map_str = ft_strjoin(map_str, line);
+		map_str = ft_strjoin(tmp_ptr, line);
 		if (!map_str)
 			return (perror("Map lines error"), NULL);
 		free(line);
