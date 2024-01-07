@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 15:40:49 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/07 07:59:27 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 11:00:43 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,15 @@ void	ft_del_textures(t_game_textures *game_textures)
 
 t_game_images	*ft_load_graphics(mlx_t *mlx)
 {
-	t_game_textures *game_textures;
+	t_game_textures	*game_textures;
 	t_game_images	*game_images;
 
 	game_textures = malloc(sizeof(t_game_textures));
-	game_images	= malloc(sizeof(t_game_images));
+	game_images = malloc(sizeof(t_game_images));
 	if (!game_textures || !game_images)
 		return (perror("Loading graphics failed"), NULL);
 	game_textures = ft_load_textures();
 	game_images = ft_load_images(mlx, game_textures);
 	ft_del_textures(game_textures);
 	return (game_images);
-
 }
