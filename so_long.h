@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 20:57:00 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 21:10:32 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef struct map_size_s
 
 typedef struct elem_size_s
 {
-	double	width;
-	double	height;
+	int32_t	width;
+	int32_t	height;
 }	t_elem_size;
 
 typedef struct display_size_s
