@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 11:08:59 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 11:30:25 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ mlx_t	*ft_game_init(char **map)
 	return (mlx);
 }
 
+/*TODO
+1) Check leakege before event handling
+2) Implement map check
+3) Implement game status flags (player, move, etc)
+*/
 int32_t	main(int32_t argc, const char *argv[])
 {
 	mlx_t			*mlx;
