@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/07 12:11:56 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 18:16:40 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ char	**ft_generate_map(int width, int height)
 
 void	ft_add_graph_elm(mlx_t *mlx, char **map)
 {
-	t_map_size	*map_size;
-	t_elem_size	*elem_size;
+	t_map_size		*map_size;
+	t_elem_size		*elem_size;
 	t_game_images	*game_images;
 	int	x;
 	int	y;
@@ -81,7 +81,6 @@ void	ft_add_graph_elm(mlx_t *mlx, char **map)
 		}
 		y++;
 	}
-	mlx_delete_image(mlx, game_images->exit);
 	free(map_size);
 	free(elem_size);
 	free(game_images);
