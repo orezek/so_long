@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 08:25:50 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 08:51:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int32_t main(int32_t argc, const char* argv[])
 	map = ft_load_map("./map.ber");
 	map_size = ft_get_map_size(map);
 	ft_printf("%d\n%d\n",map_size->width, map_size->height);
-	//ft_print_map(map);
 	element_size = ft_cal_elem_size(map_size);
 	ft_resize_assets(game_images, element_size);
 	mlx_image_to_window(mlx, game_images->space, 0, 0);
 	ft_add_graph_elm(map, game_images, mlx, element_size);
+	mlx_set_window_size(mlx, element_size->width * map_size->width, element_size->height * map_size->height);
 	mlx_set_window_title(mlx, "Game of Hearts");
 	mlx_loop(mlx); // keeps the window being rendered
 	mlx_terminate(mlx); // terminates mlx and cleans up the rosources
