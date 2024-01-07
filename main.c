@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 17:09:42 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/07 17:32:26 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,6 @@ mlx_t	*ft_game_init(char **map)
 	return (free(map_size), free(element_size), mlx);
 }
 
-int	ft_free_array(char **array)
-{
-	char	**tmp_ptr;
-
-	tmp_ptr = array;
-	while (*array != NULL)
-	{
-		free(*array);
-		array++;
-	}
-	free(tmp_ptr);
-}
 
 /*TODO
 1) Check leakege before event handling
