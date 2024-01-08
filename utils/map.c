@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/07 21:08:21 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/08 08:52:16 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ t_elem_size	*ft_get_elem_size(t_map_size *map_size)
 	// elem_size->height = 1050 / map_size->height;
 	elem_size->width =  1850/ map_size->width;
 	elem_size->height = 1136 / map_size->height;
-	printf("%f:%f\n", elem_size->width, elem_size->height);
+	printf("%d:%d\n", elem_size->width, elem_size->height);
 	free(display_size);
 	return (elem_size);
 }
