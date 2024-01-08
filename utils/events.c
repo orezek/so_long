@@ -6,31 +6,48 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/07 20:58:52 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/08 21:54:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-// think about naming these events - is does not make it right, it is not a flag
-void	is_esc_event(mlx_key_data_t k_data, void *param)
+
+// on escape press
+void	on_esc_press(mlx_key_data_t k_data, void *param)
 {
 	if (k_data.key == MLX_KEY_ESCAPE && k_data.action == MLX_PRESS)
 	{
-		ft_printf("%s", "ESC Pressed.");
+		extern mlx_t	*mlx;
+		ft_printf("%s\n", "ESC Pressed");
+		mlx_close_window(mlx);
 	}
 }
-// test resize event
-void	is_resized(int32_t width, int32_t height, void *param)
+
+void on_wsad_press(mlx_key_data_t k_data, void *param)
+{
+	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS)
+		ft_printf("%s", "W: pressed\n");
+	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS)
+		ft_printf("%s", "S: pressed\n");
+	else if (k_data.key == MLX_KEY_A && k_data.action == MLX_PRESS)
+		ft_printf("%s", "A: pressed\n");
+	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS)
+		ft_printf("%s", "D: pressed\n");
+}
+// reacts on window resizing
+void	on_resize(int32_t width, int32_t height, void *param)
 {
 	ft_printf("%d\\%d\n", width, height);
 }
 
-void	events(mlx_key_data_t k_data, void *param)
+// functions that are used directly in the event handler
+void	on_key_press(mlx_key_data_t k_data, void *param)
 {
-	is_esc_event(k_data, param);
+	on_esc_press(k_data, param);
+	on_wsad_press(k_data, param);
 }
 // test resize event
-void	win_events(int32_t width, int32_t height, void *param)
+void	on_window_resize(int32_t width, int32_t height, void *param)
 {
-	is_resized(width, height, param);
+	on_resize(width, height, param);
 }

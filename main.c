@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/07 20:51:17 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/08 17:57:07 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
+mlx_t *mlx;
 
 mlx_t	*ft_game_init(char **map)
 {
@@ -40,14 +42,14 @@ mlx_t	*ft_game_init(char **map)
 */
 int32_t	main(int32_t argc, const char *argv[])
 {
-	mlx_t	*mlx;
+	//mlx_t	*mlx;
 	char	**map;
 
 	map = ft_load_map("./map.ber");
 	mlx = ft_game_init(map);
 	ft_add_graph_elm(mlx, map);
-	mlx_key_hook(mlx, &events, (void *) map);
-	mlx_resize_hook(mlx, &win_events, (void *) map);
+	mlx_key_hook(mlx, &on_key_press, (void *) map);
+	mlx_resize_hook(mlx, &on_window_resize, (void *) map);
 	mlx_loop(mlx);
 	mlx_close_window(mlx);
 	mlx_terminate(mlx);
