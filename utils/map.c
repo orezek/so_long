@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/09 19:13:10 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/09 19:39:14 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,13 @@ void	ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context)
 	t_elem_size		*elem_size;
 	t_game_images	*game_images;
 	char			**map;
-	
+	int				x;
+	int				y;
+
 	map = game_context->map;
 	elem_size = game_context->game_dimensions->element_size;
 	map_size = game_context->game_dimensions->map_size;
-	int	x;
-	int	y;
-
-	game_images = ft_load_graphics(mlx);
+	game_images = game_context->game_images;
 	mlx_image_to_window(mlx, game_images->space, 0, 0);
 	ft_resize_assets(game_images, game_context->game_dimensions->element_size);
 	//height from top to buttom
@@ -84,9 +83,6 @@ void	ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context)
 		}
 		y++;
 	}
-	free(map_size);
-	free(elem_size);
-	free(game_images);
 }
 
 void	ft_print_map(char **map)
@@ -124,7 +120,7 @@ t_elem_size	*ft_get_elem_size(t_map_size *map_size)
 	// elem_size->height = 1136 / map_size->height;
 	elem_size->width =  1620/ map_size->width;
 	elem_size->height = 990 / map_size->height;
-	printf("%d:%d\n", elem_size->width, elem_size->height);
+	printf("ft_get_elem_size: %d:%d\n", elem_size->width, elem_size->height);
 	free(display_size);
 	return (elem_size);
 }
