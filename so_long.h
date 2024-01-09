@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/08 22:04:19 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/09 18:47:58 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ t_elem_size			*ft_get_elem_size(t_map_size *map_size);
 t_map_size			*ft_get_map_size(char **map);
 char				**ft_load_map(char *map_path);
 t_game_images		*ft_load_graphics(mlx_t *mlx);
-mlx_t				*ft_game_init(char **map);
+mlx_t				*ft_game_init(char **map,  t_game_context *game_context);
 int					ft_free_array(char **array);
 void				on_key_press(mlx_key_data_t k_data, void *param);
 void				on_window_resize(int32_t width, int32_t height, void *param);
+void				ft_clean_game(mlx_t *mlx, t_game_context *game_context);
 #endif

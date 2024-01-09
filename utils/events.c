@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/08 21:54:55 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/08 22:24:38 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,17 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 // reacts on window resizing
 void	on_resize(int32_t width, int32_t height, void *param)
 {
-	ft_printf("%d\\%d\n", width, height);
+	// this is just test - think about how to work with struct of structs
+	int t_height = 100;
+	int	t_width = 100;
+	// t_game_context	*game_context;
+	// game_context = (t_game_context*) param;
+	// game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
+	// game_context->game_dimensions->display_size->width = width;
+	// game_context->game_dimensions->display_size->height = height;
+	// t_height = game_context->game_dimensions->display_size->height;
+	// t_width = game_context->game_dimensions->display_size->width;
+	ft_printf("%d\\%d\n", t_width, t_height);
 }
 
 // functions that are used directly in the event handler
