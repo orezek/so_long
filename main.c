@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/09 18:47:50 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/09 18:56:32 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,22 @@ mlx_t *mlx;
 
 mlx_t	*ft_game_init(char **map,  t_game_context *game_context)
 {
-	mlx_t			*mlx;
-	t_elem_size		*element_size;
-	t_map_size		*map_size;
-
-	map_size = ft_get_map_size(map);
-	element_size = ft_get_elem_size(map_size);
 	mlx = mlx_init(1, 1, "SO_LONG", true);
 	if (!mlx)
 		return (NULL);
-	mlx_set_window_size(mlx, element_size->width * map_size->width,
-		element_size->height * map_size->height);
+	mlx_set_window_size(mlx, game_context->game_dimensions->element_size->width * game_context->game_dimensions->map_size->width,
+	game_context->game_dimensions->element_size->height * game_context->game_dimensions->map_size->height);
 	mlx_set_window_title(mlx, "Game of Hearts");
-	return (free(map_size), free(element_size), mlx);
+	return (mlx);
 }
 
 void	ft_clean_game(mlx_t *mlx, t_game_context *game_context)
 {
 	mlx_close_window(mlx);
 	mlx_terminate(mlx);
+	free(game_context->game_dimensions->map_size);
+	free(game_context->game_dimensions->element_size);
+	free(game_context->game_dimensions);
 	ft_free_array(game_context->map);
 }
 /*TODO
