@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/08 13:17:02 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/09 19:13:10 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,22 @@ char	**ft_generate_map(int width, int height)
 	return (game_map);
 }
 
-void	ft_add_graph_elm(mlx_t *mlx, char **map)
+void	ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context)
 {
 	t_map_size		*map_size;
 	t_elem_size		*elem_size;
 	t_game_images	*game_images;
+	char			**map;
+	
+	map = game_context->map;
+	elem_size = game_context->game_dimensions->element_size;
+	map_size = game_context->game_dimensions->map_size;
 	int	x;
 	int	y;
 
 	game_images = ft_load_graphics(mlx);
-	map_size = ft_get_map_size(map);
-	elem_size = ft_get_elem_size(map_size);
 	mlx_image_to_window(mlx, game_images->space, 0, 0);
-	ft_resize_assets(game_images, elem_size);
+	ft_resize_assets(game_images, game_context->game_dimensions->element_size);
 	//height from top to buttom
 	y = 0;
 	while (y < map_size->height)

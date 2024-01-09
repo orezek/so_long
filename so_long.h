@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/09 18:47:58 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/09 19:18:14 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct game_context_s
 
 }	t_game_context;
 
-void				ft_add_graph_elm(mlx_t *mlx, char **map);
+void				ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context);
 char				**ft_generate_map(int height, int width);
 void				ft_print_map(char **map);
 t_game_images		*ft_load_images(mlx_t *mlx, t_game_textures *game_textures);
@@ -91,7 +91,7 @@ t_elem_size			*ft_get_elem_size(t_map_size *map_size);
 t_map_size			*ft_get_map_size(char **map);
 char				**ft_load_map(char *map_path);
 t_game_images		*ft_load_graphics(mlx_t *mlx);
-mlx_t				*ft_game_init(char **map,  t_game_context *game_context);
+mlx_t				*ft_game_init(t_game_context *game_context);
 int					ft_free_array(char **array);
 void				on_key_press(mlx_key_data_t k_data, void *param);
 void				on_window_resize(int32_t width, int32_t height, void *param);
