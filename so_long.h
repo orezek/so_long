@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/11 09:54:54 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 17:41:31 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,18 @@ typedef struct game_dimensions_s
 	t_elem_size		*element_size;
 }	t_game_dimensions;
 
+typedef struct player_position_s
+{
+	int32_t x;
+	int32_t y;
+}	t_player_position;
+
 typedef struct game_context_s
 {
 	char				**map;
 	t_game_dimensions	*game_dimensions;
 	t_game_images		*game_images;
+	t_player_position	*player_position;
 
 }	t_game_context;
 
@@ -97,4 +104,5 @@ void				on_key_press(mlx_key_data_t k_data, void *param);
 void				on_window_resize(int32_t width, int32_t height, void *param);
 void				ft_clean_game(mlx_t *mlx, t_game_context *game_context);
 t_elem_size			*ft_get_elem_size_v2(t_map_size *map_size, t_display_size *display_size);
+t_player_position	*ft_get_player_position(char **map);
 #endif

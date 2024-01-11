@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/11 10:49:33 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 19:47:27 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,52 @@ void	on_esc_press(mlx_key_data_t k_data, void *param)
 void on_wsad_press(mlx_key_data_t k_data, void *param)
 {
 	t_game_context	*game_context;
+	char	**map;
+
+	//map = game_context->map;
 
 	game_context = (t_game_context *) param;
-	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS)
+	// x 1 y 5
+	// && game_context->map[game_context->player_position->x][game_context->player_position->y - 1] != '1'
+	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y -1][game_context->player_position->x] != '1')
 	{
-		game_context->game_images->player->instances[0].y -= (game_context->game_dimensions->element_size->height);
 		ft_printf("%s", "W: pressed\n");
+		game_context->game_images->player->instances[0].y -= (game_context->game_dimensions->element_size->height);
+		game_context->player_position->y -= 1;
+		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
+		ft_printf("%c: \n", game_context->map[game_context->player_position->y - 1][game_context->player_position->x]);
 	}
-	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS)
+	// && game_context->map[game_context->player_position->x][game_context->player_position->y + 1] != '1'
+	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y + 1][game_context->player_position->x] != '1')
 	{
 		ft_printf("%s", "S: pressed\n");
 		game_context->game_images->player->instances[0].y += (game_context->game_dimensions->element_size->height);
+		game_context->player_position->y += 1;
+		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
+		ft_printf("%c: \n", game_context->map[game_context->player_position->y + 1][game_context->player_position->x]);
 	}
-	else if (k_data.key == MLX_KEY_A && k_data.action == MLX_PRESS)
+	else if (k_data.key == MLX_KEY_A && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y][game_context->player_position->x - 1] != '1')
 	{
 		ft_printf("%s", "A: pressed\n");
 		game_context->game_images->player->instances[0].x -= (game_context->game_dimensions->element_size->width);
+		game_context->player_position->x -= 1;
+		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
+		ft_printf("%c: \n", game_context->map[game_context->player_position->y][game_context->player_position->x - 1]);
 	}
-	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS)
+	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y][game_context->player_position->x + 1] != '1')
 	{
 		ft_printf("%s", "D: pressed\n");
 		game_context->game_images->player->instances[0].x += (game_context->game_dimensions->element_size->width);
+		game_context->player_position->x += 1;
+		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
+		ft_printf("%c: \n", game_context->map[game_context->player_position->y][game_context->player_position->x + 1]);
 	}
 }
 // reacts on window resizing - experimental
 void	on_resize(int32_t width, int32_t height, void *param)
 {
 	ft_printf("On resize: %d\\%d\n", width, height);
+
 }
 
 // functions that are used directly in the event handler (hook)

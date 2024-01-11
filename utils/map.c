@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/11 10:53:07 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 19:53:20 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,17 @@ void	ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context)
 
 void	ft_print_map(char **map)
 {
-	while (*map)
+	char	**tmp_ptr;
+
+	tmp_ptr = map;
+	while (*tmp_ptr)
 	{
-		while(**map)
+		while(**tmp_ptr)
 		{
-			ft_printf("%c", **map);
-			(*map)++;
+			ft_printf("%c", **tmp_ptr);
+			(*tmp_ptr)++;
 		}
-		map++;
+		tmp_ptr++;
 		ft_putchar_fd('\n', 1);
 	}
 }
@@ -175,13 +178,13 @@ char	**ft_load_map(char *map_path)
 	map = NULL;
 	line = NULL;
 	tmp_ptr = NULL;
-	map_str = malloc(sizeof(char *));
-	map_str[0] = '\0';
+	map_str = malloc(1);
 	if(!map_str)
 		return (perror("Map str malloc failed"), NULL);
+	map_str[0] = '\0';
 	fd = open(map_path, O_RDONLY, 0444);
 	if (fd == -1)
-		return (perror("Map reading failed"), NULL);
+		return (free(map_str), ("Map reading failed"), NULL);
 	while(line = ft_get_next_line(fd))
 	{
 		tmp_ptr = map_str;
@@ -195,5 +198,34 @@ char	**ft_load_map(char *map_path)
 	free(map_str);
 	close(fd);
 	return (map);
+}
+
+t_player_position	*ft_get_player_position(char **map)
+{
+	t_player_position	*player_position;
+
+	player_position = malloc(sizeof(t_player_position));
+	if(!player_position)
+		return (NULL);
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y] != NULL)
+	{
+		x = 0;
+		while (map[y][x] != '\0')
+		{
+			if (map[y][x] == 'P')
+			{
+				player_position->y = y;
+				player_position->x = x;
+				return (player_position);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (NULL);
 }
 
