@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/11 17:41:31 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:49:07 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ typedef struct player_position_s
 
 typedef struct game_context_s
 {
+	int					no_collectibles;
 	char				**map;
 	t_game_dimensions	*game_dimensions;
 	t_game_images		*game_images;
 	t_player_position	*player_position;
-
 }	t_game_context;
 
 void				ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context);
@@ -105,4 +105,5 @@ void				on_window_resize(int32_t width, int32_t height, void *param);
 void				ft_clean_game(mlx_t *mlx, t_game_context *game_context);
 t_elem_size			*ft_get_elem_size_v2(t_map_size *map_size, t_display_size *display_size);
 t_player_position	*ft_get_player_position(char **map);
+size_t				get_no_collectibles(t_game_context *game_context);
 #endif

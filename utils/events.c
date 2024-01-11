@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/11 19:47:27 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:50:00 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ void	on_esc_press(mlx_key_data_t k_data, void *param)
 void on_wsad_press(mlx_key_data_t k_data, void *param)
 {
 	t_game_context	*game_context;
-	char	**map;
-
-	//map = game_context->map;
 
 	game_context = (t_game_context *) param;
-	// x 1 y 5
-	// && game_context->map[game_context->player_position->x][game_context->player_position->y - 1] != '1'
+
 	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y -1][game_context->player_position->x] != '1')
 	{
 		ft_printf("%s", "W: pressed\n");
@@ -41,7 +37,6 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
 		ft_printf("%c: \n", game_context->map[game_context->player_position->y - 1][game_context->player_position->x]);
 	}
-	// && game_context->map[game_context->player_position->x][game_context->player_position->y + 1] != '1'
 	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y + 1][game_context->player_position->x] != '1')
 	{
 		ft_printf("%s", "S: pressed\n");

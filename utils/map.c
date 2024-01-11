@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/11 19:53:20 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:53:34 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,5 +227,30 @@ t_player_position	*ft_get_player_position(char **map)
 		y++;
 	}
 	return (NULL);
+}
+
+
+size_t	get_no_collectibles(t_game_context *game_context)
+{
+	int		x;
+	int		y;
+	char	**map;
+
+	map = game_context->map;
+	if (!map)
+		return (1);
+	y = 0;
+	while (map[y] != NULL)
+	{
+		x = 0;
+		while (map[y][x] != '\0')
+		{
+			if (map[y][x] == 'C')
+				game_context->no_collectibles++;
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }
 

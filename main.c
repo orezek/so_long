@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/11 19:31:37 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:52:03 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->game_images = malloc(sizeof(t_game_images));
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
 	game_context->map = ft_load_map("./map.ber");
-	map = game_context->map;
 	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map);
 	game_context->game_dimensions->element_size = ft_get_elem_size(game_context->game_dimensions->map_size);
 	game_context->player_position = ft_get_player_position(game_context->map);
-	//ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
-	//ft_print_map(map);
 	mlx = ft_game_init(game_context);
 	game_context->game_images = ft_load_graphics(mlx);
 	mlx_get_monitor_size(0, &game_context->game_dimensions->display_size->width, &game_context->game_dimensions->display_size->height);
 	ft_add_graph_elm(mlx, game_context);
+	ft_printf("Exit: x:%d: y:%d\n", game_context->game_images->exit->instances[0].x, game_context->game_images->exit->instances[0].y);
+	get_no_collectibles(game_context);
+	ft_printf("No col: %d\n", game_context->no_collectibles);
 	mlx_key_hook(mlx, &on_key_press, (void *) game_context);
 	mlx_resize_hook(mlx, &on_window_resize, (void *) game_context);
 	mlx_loop(mlx);
