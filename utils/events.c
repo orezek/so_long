@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/09 22:11:11 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 09:58:51 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,10 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS)
 		ft_printf("%s", "D: pressed\n");
 }
-// reacts on window resizing
+// reacts on window resizing - experimental
 void	on_resize(int32_t width, int32_t height, void *param)
 {
-
-	extern mlx_t	*mlx;
-	t_game_context *game_context;
-	game_context = (t_game_context *) param;
-	game_context->game_dimensions->display_size ->width = width;
-	game_context->game_dimensions->display_size->height = height;
-	game_context->game_dimensions->element_size = ft_get_elem_size(game_context->game_dimensions->map_size);
-	ft_add_graph_elm(mlx, game_context);
-	ft_printf("%d\\%d\n", width, height);
+	ft_printf("On resize: %d\\%d\n", width, height);
 }
 
 // functions that are used directly in the event handler (hook)

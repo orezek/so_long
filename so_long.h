@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/09 19:18:14 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 09:54:54 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ int					ft_free_array(char **array);
 void				on_key_press(mlx_key_data_t k_data, void *param);
 void				on_window_resize(int32_t width, int32_t height, void *param);
 void				ft_clean_game(mlx_t *mlx, t_game_context *game_context);
+t_elem_size			*ft_get_elem_size_v2(t_map_size *map_size, t_display_size *display_size);
 #endif
