@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/11 21:52:03 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:55:31 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	mlx_get_monitor_size(0, &game_context->game_dimensions->display_size->width, &game_context->game_dimensions->display_size->height);
 	ft_add_graph_elm(mlx, game_context);
 	ft_printf("Exit: x:%d: y:%d\n", game_context->game_images->exit->instances[0].x, game_context->game_images->exit->instances[0].y);
-	get_no_collectibles(game_context);
+	ft_get_no_collectibles(game_context);
 	ft_printf("No col: %d\n", game_context->no_collectibles);
 	mlx_key_hook(mlx, &on_key_press, (void *) game_context);
 	mlx_resize_hook(mlx, &on_window_resize, (void *) game_context);

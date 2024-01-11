@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/11 21:53:34 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:55:20 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ t_player_position	*ft_get_player_position(char **map)
 }
 
 
-size_t	get_no_collectibles(t_game_context *game_context)
+size_t	ft_get_no_collectibles(t_game_context *game_context)
 {
 	int		x;
 	int		y;
