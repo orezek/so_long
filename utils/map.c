@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/11 21:55:20 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/12 20:31:04 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,11 +246,81 @@ size_t	ft_get_no_collectibles(t_game_context *game_context)
 		while (map[y][x] != '\0')
 		{
 			if (map[y][x] == 'C')
-				game_context->no_collectibles++;
+				game_context->collectables->no_collectables++;
 			x++;
 		}
 		y++;
 	}
+	game_context->collectables->remaining_collectables = game_context->collectables->no_collectables;
 	return (0);
 }
 
+
+int	ft_is_on_collectible(t_game_context *game_context)
+{
+	int	x_col;
+	int	y_col;
+	int	i;
+
+	i = 0;
+	while (i < game_context->collectables->no_collectables)
+	{
+		x_col = game_context->game_images->collectible->instances[i].x;
+		y_col = game_context->game_images->collectible->instances[i].y;
+		if (x_col == game_context->player_position->x * game_context->game_dimensions->element_size->width &&
+			y_col == game_context->player_position->y * game_context->game_dimensions->element_size->height &&
+			game_context->game_images->collectible->instances[i].enabled == 1)
+			{
+				game_context->game_images->collectible->instances[i].enabled = 0;
+				game_context->collectables->remaining_collectables -= 1;
+				return (0);
+			}
+		i++;
+	}
+	ft_printf("No remaining col: %d\n", game_context->collectables->remaining_collectables);
+	return (1);
+}
+
+
+t_exit_position	*ft_get_exit_position(char **map)
+{
+	t_exit_position	*exit_position;
+
+	exit_position = malloc(sizeof(t_player_position));
+	if(!exit_position)
+		return (NULL);
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y] != NULL)
+	{
+		x = 0;
+		while (map[y][x] != '\0')
+		{
+			if (map[y][x] == 'E')
+			{
+				exit_position->y = y;
+				exit_position->x = x;
+				return (exit_position);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (NULL);
+}
+
+int	ft_end_game(t_game_context *game_context)
+{
+	extern mlx_t	*mlx;
+	if (game_context->player_position->x == game_context->exit_position->x &&
+		game_context->player_position->y == game_context->exit_position->y &&
+		game_context->collectables->remaining_collectables == 0)
+		{
+			ft_printf("%s\n", "Exit Reached");
+			mlx_close_window(mlx);
+			return (0);
+		}
+	return(1);
+}

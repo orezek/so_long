@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/11 21:55:24 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/12 20:33:41 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,26 @@ typedef struct player_position_s
 	int32_t y;
 }	t_player_position;
 
+typedef struct exit_position_s
+{
+	int32_t	x;
+	int32_t	y;
+} t_exit_position;
+
+typedef struct collectable_s
+{
+	int	no_collectables;
+	int	remaining_collectables;
+}	t_collectable;
+
 typedef struct game_context_s
 {
-	int					no_collectibles;
+	t_collectable		*collectables;
 	char				**map;
 	t_game_dimensions	*game_dimensions;
 	t_game_images		*game_images;
 	t_player_position	*player_position;
+	t_exit_position		*exit_position;
 }	t_game_context;
 
 void				ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context);
@@ -106,4 +119,7 @@ void				ft_clean_game(mlx_t *mlx, t_game_context *game_context);
 t_elem_size			*ft_get_elem_size_v2(t_map_size *map_size, t_display_size *display_size);
 t_player_position	*ft_get_player_position(char **map);
 size_t				ft_get_no_collectibles(t_game_context *game_context);
+int					ft_is_on_collectible(t_game_context *game_context);
+t_exit_position		*ft_get_exit_position(char **map);
+int					ft_end_game(t_game_context *game_context);
 #endif

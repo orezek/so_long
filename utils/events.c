@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/11 21:50:00 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/12 20:37:41 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		game_context->player_position->y -= 1;
 		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
 		ft_printf("%c: \n", game_context->map[game_context->player_position->y - 1][game_context->player_position->x]);
+		ft_is_on_collectible(game_context);
+		ft_end_game(game_context);
 	}
 	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y + 1][game_context->player_position->x] != '1')
 	{
@@ -44,6 +46,8 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		game_context->player_position->y += 1;
 		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
 		ft_printf("%c: \n", game_context->map[game_context->player_position->y + 1][game_context->player_position->x]);
+		ft_is_on_collectible(game_context);
+		ft_end_game(game_context);
 	}
 	else if (k_data.key == MLX_KEY_A && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y][game_context->player_position->x - 1] != '1')
 	{
@@ -52,6 +56,8 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		game_context->player_position->x -= 1;
 		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
 		ft_printf("%c: \n", game_context->map[game_context->player_position->y][game_context->player_position->x - 1]);
+		ft_is_on_collectible(game_context);
+		ft_end_game(game_context);
 	}
 	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS && game_context->map[game_context->player_position->y][game_context->player_position->x + 1] != '1')
 	{
@@ -60,6 +66,8 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		game_context->player_position->x += 1;
 		ft_printf("Player Pos: x:%d y:%d\n", game_context->player_position->x, game_context->player_position->y);
 		ft_printf("%c: \n", game_context->map[game_context->player_position->y][game_context->player_position->x + 1]);
+		ft_is_on_collectible(game_context);
+		ft_end_game(game_context);
 	}
 }
 // reacts on window resizing - experimental
