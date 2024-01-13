@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/12 20:33:41 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 11:28:21 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define WIDTH 1680
 # define HEIGHT 1050
 
+// Aliases
+typedef int32_t	t_player_moves;
+
+// Structs
 typedef struct game_images_s
 {
 	mlx_image_t	*wall;
@@ -73,15 +77,21 @@ typedef struct game_dimensions_s
 
 typedef struct player_position_s
 {
-	int32_t x;
-	int32_t y;
+	int32_t	x;
+	int32_t	y;
 }	t_player_position;
+
+typedef struct player_s
+{
+	t_player_moves		player_moves;
+	t_player_position	player_position;
+}	t_player;
 
 typedef struct exit_position_s
 {
 	int32_t	x;
 	int32_t	y;
-} t_exit_position;
+}	t_exit_position;
 
 typedef struct collectable_s
 {
@@ -114,9 +124,11 @@ t_game_images		*ft_load_graphics(mlx_t *mlx);
 mlx_t				*ft_game_init(t_game_context *game_context);
 int					ft_free_array(char **array);
 void				on_key_press(mlx_key_data_t k_data, void *param);
-void				on_window_resize(int32_t width, int32_t height, void *param);
+void				on_window_resize(int32_t width, int32_t height,
+						void *param);
 void				ft_clean_game(mlx_t *mlx, t_game_context *game_context);
-t_elem_size			*ft_get_elem_size_v2(t_map_size *map_size, t_display_size *display_size);
+t_elem_size			*ft_get_elem_size_v2(t_map_size *map_size,
+						t_display_size *display_size);
 t_player_position	*ft_get_player_position(char **map);
 size_t				ft_get_no_collectibles(t_game_context *game_context);
 int					ft_is_on_collectible(t_game_context *game_context);
