@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/13 11:52:30 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 11:55:51 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,7 @@ int	ft_is_on_collectible(t_game_context *game_context)
 			}
 		i++;
 	}
-	ft_printf("No remaining col: %d\n", game_context->collectables->remaining_collectables);
+	//ft_printf("No remaining col: %d\n", game_context->collectables->remaining_collectables);
 	return (0);
 }
 
