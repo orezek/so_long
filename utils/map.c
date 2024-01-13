@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/13 13:52:46 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 14:03:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ t_elem_size	*ft_get_elem_size(t_map_size *map_size)
 	elem_size = malloc(sizeof(t_elem_size));
 	if (!elem_size)
 		return (NULL);
-	elem_size->width =  800 / map_size->width;
-	elem_size->height = 600 / map_size->height;
+	elem_size->width =  1200 / map_size->width;
+	elem_size->height = 900 / map_size->height;
 	printf("ft_get_elem_size: %d:%d\n", elem_size->width, elem_size->height);
 	return (elem_size);
 }
