@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/13 12:50:52 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 13:52:15 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ void	ft_clean_game(mlx_t *mlx, t_game_context *game_context)
 2) Implement map check
 3) Re-implement ft_get_elem_size() use game_context struct
 */
+
 int32_t	main(int32_t argc, const char *argv[])
 {
 	t_game_context	*game_context;
 	char	**map;
 
 
-
+	//ft_get_window_size(game_context);
 	game_context = malloc(sizeof(t_game_context));
 	game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
 	game_context->game_images = malloc(sizeof(t_game_images));
@@ -77,7 +78,8 @@ int32_t	main(int32_t argc, const char *argv[])
 	mlx = ft_game_init(game_context);
 	// malloc
 	game_context->game_images = ft_load_graphics(mlx);
-	mlx_get_monitor_size(0, &game_context->game_dimensions->display_size->width, &game_context->game_dimensions->display_size->height);
+	// mlx_get_monitor_size(0, &game_context->game_dimensions->display_size->width, &game_context->game_dimensions->display_size->height);
+	// printf("%d:%d\n", game_context->game_dimensions->display_size->width, game_context->game_dimensions->display_size->height);
 	ft_add_graph_elm(mlx, game_context);
 	ft_get_no_collectibles(game_context);
 	mlx_key_hook(mlx, &on_key_press, (void *) game_context);

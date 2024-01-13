@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/13 11:30:59 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 13:22:43 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,5 @@ size_t				ft_get_no_collectibles(t_game_context *game_context);
 int					ft_is_on_collectible(t_game_context *game_context);
 t_exit_position		*ft_get_exit_position(char **map);
 int					ft_end_game(t_game_context *game_context);
+void				ft_get_window_size(t_game_context *game_context);
 #endif

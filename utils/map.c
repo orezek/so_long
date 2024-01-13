@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/13 11:55:51 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 13:52:46 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,26 +110,12 @@ void	ft_print_map(char **map)
 t_elem_size	*ft_get_elem_size(t_map_size *map_size)
 {
 	t_elem_size 	*elem_size;
-	t_display_size	*display_size;
-
-	display_size = malloc(sizeof(t_display_size));
-	elem_size = malloc(sizeof(t_elem_size));
-	mlx_get_monitor_size(0, &display_size->width, &display_size->height);
-	elem_size->width =  1850/ map_size->width;
-	elem_size->height = 1136 / map_size->height;
-	printf("ft_get_elem_size: %d:%d\n", elem_size->width, elem_size->height);
-	free(display_size);
-	return (elem_size);
-}
-
-// experimental
-t_elem_size	*ft_get_elem_size_v2(t_map_size *map_size, t_display_size *display_size)
-{
-	t_elem_size 	*elem_size;
 
 	elem_size = malloc(sizeof(t_elem_size));
-	elem_size->width =  display_size->width / map_size->width;
-	elem_size->height = display_size->height / map_size->height;
+	if (!elem_size)
+		return (NULL);
+	elem_size->width =  800 / map_size->width;
+	elem_size->height = 600 / map_size->height;
 	printf("ft_get_elem_size: %d:%d\n", elem_size->width, elem_size->height);
 	return (elem_size);
 }
