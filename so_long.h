@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/13 11:28:21 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 11:30:59 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct player_position_s
 typedef struct player_s
 {
 	t_player_moves		player_moves;
-	t_player_position	player_position;
+	t_player_position	*player_position;
 }	t_player;
 
 typedef struct exit_position_s
@@ -105,7 +105,7 @@ typedef struct game_context_s
 	char				**map;
 	t_game_dimensions	*game_dimensions;
 	t_game_images		*game_images;
-	t_player_position	*player_position;
+	t_player			*player;
 	t_exit_position		*exit_position;
 }	t_game_context;
 

@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/12 20:31:04 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 11:52:30 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,18 +267,17 @@ int	ft_is_on_collectible(t_game_context *game_context)
 	{
 		x_col = game_context->game_images->collectible->instances[i].x;
 		y_col = game_context->game_images->collectible->instances[i].y;
-		if (x_col == game_context->player_position->x * game_context->game_dimensions->element_size->width &&
-			y_col == game_context->player_position->y * game_context->game_dimensions->element_size->height &&
+		if (x_col == game_context->player->player_position->x * game_context->game_dimensions->element_size->width &&
+			y_col == game_context->player->player_position->y * game_context->game_dimensions->element_size->height &&
 			game_context->game_images->collectible->instances[i].enabled == 1)
 			{
 				game_context->game_images->collectible->instances[i].enabled = 0;
 				game_context->collectables->remaining_collectables -= 1;
-				return (0);
 			}
 		i++;
 	}
 	ft_printf("No remaining col: %d\n", game_context->collectables->remaining_collectables);
-	return (1);
+	return (0);
 }
 
 
@@ -314,8 +313,8 @@ t_exit_position	*ft_get_exit_position(char **map)
 int	ft_end_game(t_game_context *game_context)
 {
 	extern mlx_t	*mlx;
-	if (game_context->player_position->x == game_context->exit_position->x &&
-		game_context->player_position->y == game_context->exit_position->y &&
+	if (game_context->player->player_position->x == game_context->exit_position->x &&
+		game_context->player->player_position->y == game_context->exit_position->y &&
 		game_context->collectables->remaining_collectables == 0)
 		{
 			ft_printf("%s\n", "Exit Reached");
