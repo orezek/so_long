@@ -1,52 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/13 14:03:55 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 21:21:36 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-char	**ft_generate_map(int width, int height)
-{
-	char	**game_map;
-	int		x;
-	int		y;
-
-	game_map = malloc((height + 1) * sizeof(char*));
-	if (!game_map)
-		return (NULL);
-
-	x = 0;
-	while (x < height)
-	{
-		y = 0;
-		game_map[x] = malloc((width + 1) * sizeof(char));
-		while (y < width)
-		{
-			if (x == 2 && y == 2)
-				game_map[x][y] = 'P';
-			else if (x == 4 && y == 6)
-				game_map[x][y] = 'E';
-			else if (y == 6 && x == 10 || y == 6 && x == 13 || y == 6 && x == 1)
-				game_map[x][y] = 'C';
-			else if (y == 0 || y < width && x < 1 || x < height && y == width - 1 || x == height - 1)
-				game_map[x][y] = '1';
-			else
-				game_map[x][y] = '0';
-			y++;
-		}
-		game_map[x][y] = '\0';
-		x++;
-	}
-	*(game_map + x) = '\0';
-	return (game_map);
-}
 
 void	ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context)
 {
@@ -83,41 +47,6 @@ void	ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context)
 		}
 		y++;
 	}
-}
-
-void	ft_print_map(char **map)
-{
-	char	**tmp_ptr;
-
-	tmp_ptr = map;
-	while (*tmp_ptr)
-	{
-		while(**tmp_ptr)
-		{
-			ft_printf("%c", **tmp_ptr);
-			(*tmp_ptr)++;
-		}
-		tmp_ptr++;
-		ft_putchar_fd('\n', 1);
-	}
-}
-
-// element_width = display_width / map_width
-// element_width = display_width / map_width
-
-// display_width = element_width * map_width
-// display_height = element_height * map_height
-t_elem_size	*ft_get_elem_size(t_map_size *map_size)
-{
-	t_elem_size 	*elem_size;
-
-	elem_size = malloc(sizeof(t_elem_size));
-	if (!elem_size)
-		return (NULL);
-	elem_size->width =  1200 / map_size->width;
-	elem_size->height = 900 / map_size->height;
-	printf("ft_get_elem_size: %d:%d\n", elem_size->width, elem_size->height);
-	return (elem_size);
 }
 
 t_map_size *ft_get_map_size(char **map)
@@ -186,36 +115,6 @@ char	**ft_load_map(char *map_path)
 	return (map);
 }
 
-t_player_position	*ft_get_player_position(char **map)
-{
-	t_player_position	*player_position;
-
-	player_position = malloc(sizeof(t_player_position));
-	if(!player_position)
-		return (NULL);
-	int	x;
-	int	y;
-
-	y = 0;
-	while (map[y] != NULL)
-	{
-		x = 0;
-		while (map[y][x] != '\0')
-		{
-			if (map[y][x] == 'P')
-			{
-				player_position->y = y;
-				player_position->x = x;
-				return (player_position);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (NULL);
-}
-
-
 size_t	ft_get_no_collectibles(t_game_context *game_context)
 {
 	int		x;
@@ -266,46 +165,3 @@ int	ft_is_on_collectible(t_game_context *game_context)
 	return (0);
 }
 
-
-t_exit_position	*ft_get_exit_position(char **map)
-{
-	t_exit_position	*exit_position;
-
-	exit_position = malloc(sizeof(t_player_position));
-	if(!exit_position)
-		return (NULL);
-	int	x;
-	int	y;
-
-	y = 0;
-	while (map[y] != NULL)
-	{
-		x = 0;
-		while (map[y][x] != '\0')
-		{
-			if (map[y][x] == 'E')
-			{
-				exit_position->y = y;
-				exit_position->x = x;
-				return (exit_position);
-			}
-			x++;
-		}
-		y++;
-	}
-	return (NULL);
-}
-
-int	ft_end_game(t_game_context *game_context)
-{
-	extern mlx_t	*mlx;
-	if (game_context->player->player_position->x == game_context->exit_position->x &&
-		game_context->player->player_position->y == game_context->exit_position->y &&
-		game_context->collectables->remaining_collectables == 0)
-		{
-			ft_printf("%s\n", "Exit Reached");
-			mlx_close_window(mlx);
-			return (0);
-		}
-	return(1);
-}

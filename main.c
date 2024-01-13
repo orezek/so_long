@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/13 21:06:45 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 21:22:56 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,6 @@ mlx_t	*ft_game_init(t_game_context *game_context)
 	return (mlx);
 }
 
-void	ft_clean_game(mlx_t *mlx, t_game_context *game_context)
-{
-	mlx_terminate(mlx);
-	free(game_context->game_dimensions->map_size);
-	free(game_context->game_dimensions->element_size);
-	free(game_context->game_dimensions->display_size);
-	free(game_context->game_dimensions);
-	free(game_context->game_images);
-	free(game_context->collectables);
-	free(game_context->exit_position);
-	free(game_context->player);
-	free(game_context->player->player_position);
-	free(game_context);
-	ft_free_array(game_context->map);
-}
-
 int32_t	main(int32_t argc, const char *argv[])
 {
 	t_game_context	*game_context;
@@ -60,7 +44,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	// malloc
 	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map);
 	// malloc
-	game_context->game_dimensions->element_size = ft_get_elem_size(game_context->game_dimensions->map_size);
+	game_context->game_dimensions->element_size = ft_get_image_size(game_context->game_dimensions->map_size);
 	// malloc
 	game_context->player->player_position = ft_get_player_position(game_context->map);
 	// malloc

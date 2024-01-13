@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/13 20:58:52 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/13 21:22:43 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,13 @@ typedef struct game_context_s
 }	t_game_context;
 
 void				ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context);
-char				**ft_generate_map(int height, int width);
 void				ft_print_map(char **map);
 t_game_images		*ft_load_images(mlx_t *mlx, t_game_textures *game_textures);
 void				ft_resize_assets(t_game_images *game_images,
 						t_elem_size *elem_size);
 t_game_textures		*ft_load_textures(void);
 void				ft_del_textures(t_game_textures *game_textures);
-t_elem_size			*ft_get_elem_size(t_map_size *map_size);
+t_elem_size			*ft_get_image_size(t_map_size *map_size);
 t_map_size			*ft_get_map_size(char **map);
 char				**ft_load_map(char *map_path);
 t_game_images		*ft_load_graphics(mlx_t *mlx);
