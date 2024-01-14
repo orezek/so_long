@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/13 21:21:36 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/14 22:05:32 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context)
 	int				x;
 	int				y;
 
-	map = game_context->map;
+	map = game_context->map->original_map;
 	elem_size = game_context->game_dimensions->element_size;
 	map_size = game_context->game_dimensions->map_size;
 	game_images = game_context->game_images;
@@ -121,7 +121,7 @@ size_t	ft_get_no_collectibles(t_game_context *game_context)
 	int		y;
 	char	**map;
 
-	map = game_context->map;
+	map = game_context->map->original_map;
 	if (!map)
 		return (1);
 	y = 0;

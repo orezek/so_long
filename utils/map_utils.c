@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/14 21:37:35 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/14 22:17:35 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ Oh, yes. So I need function array dup
 
 // free game_context->map-
 // free game_context->map->flooded_map
-void	ft_array_dup(t_game_context *game_context)
+void	*ft_array_dup(t_game_context *game_context)
 {
 	char	**map_dup;
 	char	**map;
@@ -64,58 +64,39 @@ void	ft_array_dup(t_game_context *game_context)
 	map = game_context->map->original_map;
 
 	counter = 0;
-	while (!map[counter])
+	while (map[counter] != NULL)
 		counter++;
-	map_dup = malloc(sizeof(char *) * counter + 1);
+	map_dup = malloc((sizeof(char *) * counter) + 1);
 	if(!map_dup)
 		return (NULL);
 	counter = 0;
-	while(!map[counter])
+	while(map[counter] != NULL)
+	{
 		map_dup[counter] = ft_strdup(map[counter]);
+		counter++;
+	}
 	map_dup[counter] = NULL;
 	game_context->map->flooded_map = map_dup;
 }
-
-void	ft_map_flood(t_game_context *game_context, size_t y, size_t x)
+// flood the duplicaed map with error checking characters
+void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 {
-	char	**map_array = game_context->map;
-
-	if (map_array[y][x] == 'c' || map_array[y][x] == 'e'
-		|| map_array[y][x] == 'p' || map_array[y][x] == '1'
-		|| map_array[y][x] == '2')
+	if (map_to_flood[y][x] == 'c' || map_to_flood[y][x] == 'e'
+		|| map_to_flood[y][x] == 'p' || map_to_flood[y][x] == '1'
+		|| map_to_flood[y][x] == '2')
 		return ;
-	if (map_array[y][x] == 'C')
-		map_array[y][x] = 'c';
-	else if (map_array[y][x] == 'P')
-		map_array[y][x] = 'p';
-	else if (map_array[y][x] == 'E')
-		map_array[y][x] = 'e';
-	else if (map_array[y][x] == '0')
-		map_array[y][x] = '2';
-	ft_map_flood(map_array, game_context->player->player_position.y + 1, x);
-	ft_map_flood(map_array, y - 1, x);
-	ft_map_flood(map_array, y, x + 1);
-	ft_map_flood(map_array, y, x - 1);
-}
-
-void	map_flood_fill(char **map_array, size_t y, size_t x)
-{
-	if (map_array[y][x] == 'c' || map_array[y][x] == 'e'
-		|| map_array[y][x] == 'p' || map_array[y][x] == '1'
-		|| map_array[y][x] == '2')
-		return ;
-	if (map_array[y][x] == 'C')
-		map_array[y][x] = 'c';
-	else if (map_array[y][x] == 'P')
-		map_array[y][x] = 'p';
-	else if (map_array[y][x] == 'E')
-		map_array[y][x] = 'e';
-	else if (map_array[y][x] == '0')
-		map_array[y][x] = '2';
-	map_flood_fill(map_array, y + 1, x);
-	map_flood_fill(map_array, y - 1, x);
-	map_flood_fill(map_array, y, x + 1);
-	map_flood_fill(map_array, y, x - 1);
+	if (map_to_flood[y][x] == 'C')
+		map_to_flood[y][x] = 'c';
+	else if (map_to_flood[y][x] == 'P')
+		map_to_flood[y][x] = 'p';
+	else if (map_to_flood[y][x] == 'E')
+		map_to_flood[y][x] = 'e';
+	else if (map_to_flood[y][x] == '0')
+		map_to_flood[y][x] = '2';
+	ft_map_flood(map_to_flood, y + 1, x);
+	ft_map_flood(map_to_flood, y - 1, x);
+	ft_map_flood(map_to_flood, y, x + 1);
+	ft_map_flood(map_to_flood, y, x - 1);
 }
 // checks if the map has X bigger then Y - look at Martin's solution
 int32_t	ft_is_map_rectangular(char **map)

@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/13 11:49:08 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/14 22:03:33 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 
 	game_context = (t_game_context *) param;
 
-	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS && game_context->map[game_context->player->player_position->y -1][game_context->player->player_position->x] != '1')
+	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y -1][game_context->player->player_position->x] != '1')
 	{
 		//ft_printf("%s", "W: pressed\n");
 		game_context->game_images->player->instances[0].y -= (game_context->game_dimensions->element_size->height);
@@ -41,7 +41,7 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		ft_is_on_collectible(game_context);
 		ft_end_game(game_context);
 	}
-	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS && game_context->map[game_context->player->player_position->y + 1][game_context->player->player_position->x] != '1')
+	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y + 1][game_context->player->player_position->x] != '1')
 	{
 		//ft_printf("%s", "S: pressed\n");
 		game_context->game_images->player->instances[0].y += (game_context->game_dimensions->element_size->height);
@@ -53,7 +53,7 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		ft_is_on_collectible(game_context);
 		ft_end_game(game_context);
 	}
-	else if (k_data.key == MLX_KEY_A && k_data.action == MLX_PRESS && game_context->map[game_context->player->player_position->y][game_context->player->player_position->x - 1] != '1')
+	else if (k_data.key == MLX_KEY_A && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y][game_context->player->player_position->x - 1] != '1')
 	{
 		//ft_printf("%s", "A: pressed\n");
 		game_context->game_images->player->instances[0].x -= (game_context->game_dimensions->element_size->width);
@@ -65,7 +65,7 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		ft_is_on_collectible(game_context);
 		ft_end_game(game_context);
 	}
-	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS && game_context->map[game_context->player->player_position->y][game_context->player->player_position->x + 1] != '1')
+	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y][game_context->player->player_position->x + 1] != '1')
 	{
 		//ft_printf("%s", "D: pressed\n");
 		game_context->game_images->player->instances[0].x += (game_context->game_dimensions->element_size->width);
