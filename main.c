@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/14 17:33:21 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/14 22:39:48 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,21 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
 	game_context->collectables = malloc(sizeof(t_collectable));
 	game_context->player = malloc(sizeof(t_player));
+	game_context->map = malloc(sizeof(t_map));
 	// malloc
-	game_context->map = ft_load_map("./map.ber"); // map load
+	game_context->map->original_map = ft_load_map("./map.ber"); // map load
+	if(ft_array_dup(game_context) == NULL)
+		printf("Duplication Failed");
 	// malloc
-	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map); // map size
+	game_context->player->player_position = ft_get_player_position(game_context->map->original_map); // gets the player position
+	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
+	ft_print_map(game_context->map->flooded_map);
+	// malloc
+	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map->original_map); // map size
 	// malloc
 	game_context->game_dimensions->element_size = ft_get_image_size(game_context->game_dimensions->map_size); // gets the element size to construct the game graphics
 	// malloc
-	game_context->player->player_position = ft_get_player_position(game_context->map); // gets the player position
-	// malloc
-	game_context->exit_position = ft_get_exit_position(game_context->map); // gets the exit position
+	game_context->exit_position = ft_get_exit_position(game_context->map->original_map); // gets the exit position
 	// mlx malloc
 	mlx = ft_game_init(game_context); // creates a window and displays it
 	// malloc

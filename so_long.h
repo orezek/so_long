@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/13 21:22:43 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/14 22:10:10 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,16 @@ typedef struct collectable_s
 	int	remaining_collectables;
 }	t_collectable;
 
+typedef struct map_s
+{
+	char	**original_map;
+	char	**flooded_map;
+}	t_map;
+
 typedef struct game_context_s
 {
 	t_collectable		*collectables;
-	char				**map;
+	t_map				*map;
 	t_game_dimensions	*game_dimensions;
 	t_game_images		*game_images;
 	t_player			*player;
@@ -132,4 +138,6 @@ int					ft_is_on_collectible(t_game_context *game_context);
 t_exit_position		*ft_get_exit_position(char **map);
 int					ft_end_game(t_game_context *game_context);
 void				ft_get_display_size(t_game_context *game_context);
+void				*ft_array_dup(t_game_context *game_context);
+void				ft_map_flood(char	**map_to_flood, size_t y, size_t x);
 #endif
