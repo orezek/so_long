@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/14 22:10:10 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/15 14:38:34 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,6 @@ int					ft_end_game(t_game_context *game_context);
 void				ft_get_display_size(t_game_context *game_context);
 void				*ft_array_dup(t_game_context *game_context);
 void				ft_map_flood(char	**map_to_flood, size_t y, size_t x);
+int32_t				ft_get_no_map_elements(char **map, char char_to_search);
+void				ft_check_map_elements(char **loaded_map, char **flooded_map);
 #endif

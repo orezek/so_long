@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/14 22:05:32 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/15 14:21:07 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,11 @@ size_t	ft_get_no_collectibles(t_game_context *game_context)
 	int		y;
 	char	**map;
 
+	game_context->collectables = malloc(sizeof(t_collectable));
+	if(!game_context->collectables)
+		return (1);
+	game_context->collectables->no_collectables = 0;
+	game_context->collectables->remaining_collectables = 0;
 	map = game_context->map->original_map;
 	if (!map)
 		return (1);

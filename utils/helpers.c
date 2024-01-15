@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:31:52 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/13 21:25:45 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/15 13:31:39 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,17 @@ void	ft_clean_game(mlx_t *mlx, t_game_context *game_context)
 	mlx_terminate(mlx);
 	free(game_context->game_dimensions->map_size);
 	free(game_context->game_dimensions->element_size);
+	free(game_context->game_images);
+	free(game_context->exit_position);
+	free(game_context->player->player_position);
+	free(game_context->player);
+	free(game_context->collectables);
 	free(game_context->game_dimensions->display_size);
 	free(game_context->game_dimensions);
-	free(game_context->game_images);
-	free(game_context->collectables);
-	free(game_context->exit_position);
-	free(game_context->player);
-	free(game_context->player->player_position);
+	ft_free_array(game_context->map->original_map);
+	ft_free_array(game_context->map->flooded_map);
+	free(game_context->map);
 	free(game_context);
-	ft_free_array(game_context->map);
 }
 
 void	ft_print_map(char **map)

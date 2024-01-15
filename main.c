@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/14 22:39:48 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/15 14:58:31 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,53 @@ mlx_t	*ft_game_init(t_game_context *game_context)
 
 int32_t	main(int32_t argc, const char *argv[])
 {
-	t_game_context	*game_context;
-	char	**map;
 
+	// first declaring variables
+	// getting argv input from the console
+	// loading and checking map
+	// loading game_context
+	// ....
+	t_game_context	*game_context;
+	char			**map;
+
+	// step 1) add map check here
+	map = ft_load_map("./map.ber"); // map load
+	// step 2) intialize game_context struct
 	game_context = malloc(sizeof(t_game_context));
+	game_context->map = malloc(sizeof(t_map)); // malloc space for t_map struct
+	game_context->map->original_map = map; //ft_load_map("./map.ber"); // map load
+	ft_array_dup(game_context);
+	game_context->player = malloc(sizeof(t_player));
+	game_context->player->player_position = ft_get_player_position(game_context->map->original_map); // gets the player position
+	game_context->exit_position = ft_get_exit_position(game_context->map->original_map); // gets the exit position
+	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
+	ft_printf("%d\n", ft_get_no_map_elements(game_context->map->original_map, 'E'));
+	ft_check_map_elements(game_context->map->original_map, game_context->map->flooded_map);
+	//ft_print_map(game_context->map->flooded_map);
+	return (1);
+
+
+	//return (1);
 	game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
-	game_context->collectables = malloc(sizeof(t_collectable));
-	game_context->player = malloc(sizeof(t_player));
-	game_context->map = malloc(sizeof(t_map));
-	// malloc
-	game_context->map->original_map = ft_load_map("./map.ber"); // map load
-	if(ft_array_dup(game_context) == NULL)
-		printf("Duplication Failed");
-	// malloc
-	game_context->player->player_position = ft_get_player_position(game_context->map->original_map); // gets the player position
-	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
-	ft_print_map(game_context->map->flooded_map);
+
+	game_context->player->player_moves = 0;
+
+
 	// malloc
 	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map->original_map); // map size
 	// malloc
 	game_context->game_dimensions->element_size = ft_get_image_size(game_context->game_dimensions->map_size); // gets the element size to construct the game graphics
 	// malloc
-	game_context->exit_position = ft_get_exit_position(game_context->map->original_map); // gets the exit position
+
+
 	// mlx malloc
 	mlx = ft_game_init(game_context); // creates a window and displays it
 	// malloc
 	game_context->game_images = ft_load_graphics(mlx); // loads graphics to the game struct
 	ft_get_display_size(game_context); // wrapper around a mlx_get_display_size
 	ft_add_graph_elm(mlx, game_context); // draws images on the window
-	// no malloc only pointer and return is void
+	// allocates the memory and initialize values
 	ft_get_no_collectibles(game_context); // gets number of collectibles
 	mlx_key_hook(mlx, &on_key_press, (void *) game_context);
 	mlx_resize_hook(mlx, &on_window_resize, (void *) game_context);

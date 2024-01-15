@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/14 22:17:35 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/15 14:59:06 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 /*
 Todo:
-1) Map check
+1) Map checks
 2) Restructuing
 3) Memory deallocation
 4) Norm
 END
-Maybe iimplement two features
+Maybe implement two features
 1) Display move count
 2) Add Gargamel
 */
@@ -33,7 +33,8 @@ Check:
 4) At least one collectible
 5) Player can reach to Exit
 6) All collectibles are reachable by the player
-7) Map is rectangular
+7) Map is rectangular and valid
+8) Check map suffix
 ---------------------
 I have:
 1) Load map to an array
@@ -107,12 +108,68 @@ int32_t	ft_is_map_rectangular(char **map)
 // if collectibles do not match the exit will never open becuase one can safely assume that the collectbiles are behind the wall
 // exit must be 1
 // player must be 1
-void	ft_check_map_elements(char **loaded_map, char **floaded_map)
+// When comparing: I need: the same number of players, exits and collectibles?
+// Yes.
+
+int32_t	ft_get_no_map_elements(char **map, char char_to_search)
+{
+	int		x;
+	int		y;
+	int		counter;
+
+	counter = 0;
+	if (!map)
+		return (perror("Empty map:"), -1);
+	y = 0;
+	while (map[y] != NULL)
+	{
+		x = 0;
+		while (map[y][x] != '\0')
+		{
+			if (map[y][x] == char_to_search)
+				counter++;
+			x++;
+		}
+		y++;
+	}
+	return (counter);
+}
+void	ft_check_map_elements(char **loaded_map, char **flooded_map)
+{
+	if (!loaded_map && !flooded_map)
+		perror("Maps are invalid:");
+	if (ft_get_no_map_elements(loaded_map, 'E') == 1 && ft_get_no_map_elements(flooded_map, 'e') == 1)
+	{
+		ft_putstr_fd("Exit is reachagle\n", 1);
+	}
+	else
+	{
+		ft_putstr_fd("Error, exit is not reachable or is more then one\n", 1);
+	}
+	if (ft_get_no_map_elements(loaded_map, 'P') == 1 && ft_get_no_map_elements(flooded_map, 'p') == 1)
+	{
+		ft_putstr_fd("One player found\n", 1);
+	}
+	else
+	{
+		ft_putstr_fd("Missing a player or more then one found\n", 1);
+	}
+	if (ft_get_no_map_elements(loaded_map, 'C') > 1 && ft_get_no_map_elements(loaded_map, 'C') == ft_get_no_map_elements(flooded_map, 'c'))
+	{
+		ft_putstr_fd("Map has valid number of collectibles\n", 1);
+	}
+	else
+	{
+		ft_putstr_fd("Error: some collectibles are not reachable or not found at all\n", 1);
+	}
+}
+// Is the map sorouded by walls (1)?
+int32_t	ft_is_wall_valid(char **map)
 {
 	;
 }
-// Is the map sorouded by walls (1)?
-int32_t ft_is_wall_valid(char **map)
+// Checks if the suffix is valid for the game
+int32_t	ft_check_valid_suffix(char *str)
 {
 	;
 }
