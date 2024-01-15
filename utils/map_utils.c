@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/15 18:51:19 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/15 21:27:20 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,6 @@ void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 	ft_map_flood(map_to_flood, y, x + 1);
 	ft_map_flood(map_to_flood, y, x - 1);
 }
-// checks if the map has X bigger then Y - look at Martin's solution
-int32_t	ft_is_map_rectangular(char **map)
-{
-	;
-}
-// compares map chars between the original and floaded. This will check of the game is playable
-// if collectibles do not match the exit will never open becuase one can safely assume that the collectbiles are behind the wall
-// exit must be 1
-// player must be 1
-// When comparing: I need: the same number of players, exits and collectibles?
-// Yes.
 
 int32_t	ft_get_no_map_elements(char **map, char char_to_search)
 {
@@ -134,6 +123,7 @@ int32_t	ft_get_no_map_elements(char **map, char char_to_search)
 	}
 	return (counter);
 }
+
 void	ft_check_map_elements(char **loaded_map, char **flooded_map)
 {
 	if (!loaded_map && !flooded_map)
@@ -162,6 +152,13 @@ void	ft_check_map_elements(char **loaded_map, char **flooded_map)
 	{
 		ft_putstr_fd("Error: some collectibles are not reachable or not found at all\n", 1);
 	}
+
+// checks if the map has X bigger then Y - look at Martin's solution
+int32_t	ft_is_map_rectangular(char **map)
+{
+	;
+}
+
 }
 // Is the map sorouded by walls (1)?
 int32_t	ft_is_wall_valid(char **map)
@@ -171,7 +168,22 @@ int32_t	ft_is_wall_valid(char **map)
 // Checks if the suffix is valid for the game
 int32_t	ft_check_valid_suffix(char *str)
 {
-	;
+	char	*suffix;
+	char	*str_suf;
+
+	suffix = "ber";
+	if (!str)
+		return (-1);
+	str_suf = str + (ft_strlen(str) - ft_strlen(suffix));
+	if (ft_strlen(str) <= ft_strlen(suffix))
+	{
+		ft_putstr_fd("Invalid map name\n", 1);
+		return (0);
+	}
+	if (ft_strncmp(suffix, str_suf, 3) == 0)
+		return(ft_putstr_fd("Map name is correct.\n", 1), 1);
+	ft_putstr_fd("Invalid map name\n", 1);
+	return (0);
 }
 
 

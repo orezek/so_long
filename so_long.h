@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/15 18:54:09 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/15 21:23:46 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int					ft_free_array(char **array);
 void				on_key_press(mlx_key_data_t k_data, void *param);
 void				on_window_resize(int32_t width, int32_t height,
 						void *param);
-void				ft_clean_game(t_game_context *game_context);
+void				ft_clean_game(mlx_t *mlx, t_game_context *game_context);
 t_player_position	*ft_get_player_position(char **map);
 size_t				ft_get_no_collectibles(t_game_context *game_context);
 int					ft_is_on_collectible(t_game_context *game_context);
@@ -142,4 +142,5 @@ void				*ft_array_dup(t_game_context *game_context);
 void				ft_map_flood(char	**map_to_flood, size_t y, size_t x);
 int32_t				ft_get_no_map_elements(char **map, char char_to_search);
 void				ft_check_map_elements(char **loaded_map, char **flooded_map);
+int32_t				ft_check_valid_suffix(char *str);
 #endif
