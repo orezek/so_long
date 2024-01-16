@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/16 13:51:08 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:38:14 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	char			**map;
 
 	// step 1) add map check here
+	ft_check_valid_suffix("map.ber");
 	map = ft_load_map("./map.ber"); // map load
 	game_context = malloc(sizeof(t_game_context));
 	game_context->map = malloc(sizeof(t_map)); // malloc space for t_map struct
@@ -72,6 +73,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
 	ft_check_map_elements(game_context->map->original_map, game_context->map->flooded_map);
 	ft_is_map_rectangular(game_context->map->original_map);
+	ft_is_wall_valid(game_context->map->original_map);
 	game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
 	ft_get_display_size(game_context); // wrapper around a mlx_get_display_size
@@ -80,9 +82,9 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_get_no_collectibles(game_context); // gets number of collectibles
 	//up to here no memory leaks
 
+	//exit(0);
 	mlx = ft_game_init(game_context); // creates a window and displays it
 	game_context->game_images = ft_load_graphics(mlx); // loads graphics to the game struct
-	ft_check_valid_suffix("map.ber");
 
 	ft_add_graph_elm(mlx, game_context); // draws images on the window
 	// allocates the memory and initialize values

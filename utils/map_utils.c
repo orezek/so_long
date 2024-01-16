@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/16 14:12:16 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:34:40 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	ft_check_map_elements(char **loaded_map, char **flooded_map)
 	{
 		ft_putstr_fd("Missing a player or more then one found\n", 1);
 	}
-	if (ft_get_no_map_elements(loaded_map, 'C') > 1 && ft_get_no_map_elements(loaded_map, 'C') == ft_get_no_map_elements(flooded_map, 'c'))
+	if (ft_get_no_map_elements(loaded_map, 'C') >= 1 && ft_get_no_map_elements(loaded_map, 'C') == ft_get_no_map_elements(flooded_map, 'c'))
 	{
 		ft_putstr_fd("Map has valid number of collectibles\n", 1);
 	}
@@ -167,9 +167,9 @@ int32_t	ft_is_map_rectangular(char **map)
 	if(!map)
 		return (1);
 	ref = ft_strlen(map[0]);
-	if (ref < 4)
+	if (ref < 5)
 	{
-		ft_putstr_fd("Error:\n Invalid map. Not enough columns", 1);
+		ft_putstr_fd("Error:\nInvalid map. Not enough columns\n", 1);
 		exit(1);
 	}
 	map_ptr = map;
@@ -185,7 +185,7 @@ int32_t	ft_is_map_rectangular(char **map)
 	}
 	if (row_counter < 3)
 	{
-		ft_putstr_fd("Error:\n Invalid map. Not enough rows", 1);
+		ft_putstr_fd("Error:\nInvalid map. Not enough rows\n", 1);
 		exit(1);
 	}
 	return (0);
@@ -194,8 +194,39 @@ int32_t	ft_is_map_rectangular(char **map)
 // Is the map sorouded by walls (1)?
 int32_t	ft_is_wall_valid(char **map)
 {
-	;
+	size_t	y;
+	size_t	x;
+
+	y = 0;
+	while (map[y])
+	{
+		if (y == 0 || map[y + 1] == NULL)
+		{
+			x = 0;
+			while (map[y][x])
+			{
+				if (map[y][x] != '1')
+				{
+					ft_putstr_fd("Error: Map is not closed.\n", 2);
+					exit (1);
+				}
+				x++;
+			}
+		}
+		else
+		{
+			if (map[y][0] != '1'
+				|| map[y][ft_strlen(map[y]) - 1] != '1')
+			{
+				ft_putstr_fd("Error: Map is not closed.\n", 2);
+				exit (1);
+			}
+		}
+		y++;
+	}
+	ft_putstr_fd("Map is correctly closed with '1'.\n", 1);
 }
+
 // Checks if the suffix is valid for the game
 int32_t	ft_check_valid_suffix(char *str)
 {

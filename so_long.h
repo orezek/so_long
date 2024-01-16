@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/16 13:52:07 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:37:51 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,4 +144,5 @@ int32_t				ft_get_no_map_elements(char **map, char char_to_search);
 void				ft_check_map_elements(char **loaded_map, char **flooded_map);
 int32_t				ft_check_valid_suffix(char *str);
 int32_t				ft_is_map_rectangular(char **map);
+int32_t				ft_is_wall_valid(char **map);
 #endif
