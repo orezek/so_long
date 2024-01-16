@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/15 21:27:20 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/16 14:12:16 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	ft_check_map_elements(char **loaded_map, char **flooded_map)
 	}
 	if (ft_get_no_map_elements(loaded_map, 'P') == 1 && ft_get_no_map_elements(flooded_map, 'p') == 1)
 	{
-		ft_putstr_fd("One player found\n", 1);
+		ft_putstr_fd("One player found and can reach the exit\n", 1);
 	}
 	else
 	{
@@ -152,14 +152,45 @@ void	ft_check_map_elements(char **loaded_map, char **flooded_map)
 	{
 		ft_putstr_fd("Error: some collectibles are not reachable or not found at all\n", 1);
 	}
+}
 
 // checks if the map has X bigger then Y - look at Martin's solution
 int32_t	ft_is_map_rectangular(char **map)
 {
-	;
+	int32_t		ref;
+	int32_t		row_counter;
+	char		**map_ptr;
+
+
+	ref = 0;
+	row_counter = 0;
+	if(!map)
+		return (1);
+	ref = ft_strlen(map[0]);
+	if (ref < 4)
+	{
+		ft_putstr_fd("Error:\n Invalid map. Not enough columns", 1);
+		exit(1);
+	}
+	map_ptr = map;
+	while (*map_ptr)
+	{
+		if (ref != ft_strlen(*map_ptr))
+		{
+			ft_putstr_fd("Error:\nInvalid map. Map is not rectangular!\n", 1);
+			exit(1);
+		}
+		row_counter++;
+		map_ptr++;
+	}
+	if (row_counter < 3)
+	{
+		ft_putstr_fd("Error:\n Invalid map. Not enough rows", 1);
+		exit(1);
+	}
+	return (0);
 }
 
-}
 // Is the map sorouded by walls (1)?
 int32_t	ft_is_wall_valid(char **map)
 {

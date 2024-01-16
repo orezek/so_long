@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/15 22:06:46 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/16 13:51:08 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->exit_position = ft_get_exit_position(game_context->map->original_map); // gets the exit position
 	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
 	ft_check_map_elements(game_context->map->original_map, game_context->map->flooded_map);
+	ft_is_map_rectangular(game_context->map->original_map);
 	game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
 	ft_get_display_size(game_context); // wrapper around a mlx_get_display_size
