@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/16 14:34:40 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/16 15:49:14 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ Oh, yes. So I need function array dup
 
 // free game_context->map-
 // free game_context->map->flooded_map
-void	*ft_array_dup(t_game_context *game_context)
+void	*ft_duplicate_map(t_game_context *game_context)
 {
 	char	**map_dup;
 	char	**map;
@@ -169,7 +169,7 @@ int32_t	ft_is_map_rectangular(char **map)
 	ref = ft_strlen(map[0]);
 	if (ref < 5)
 	{
-		ft_putstr_fd("Error:\nInvalid map. Not enough columns\n", 1);
+		ft_putstr_fd("Error: Invalid map. Not enough columns\n", 1);
 		exit(1);
 	}
 	map_ptr = map;
@@ -177,7 +177,7 @@ int32_t	ft_is_map_rectangular(char **map)
 	{
 		if (ref != ft_strlen(*map_ptr))
 		{
-			ft_putstr_fd("Error:\nInvalid map. Map is not rectangular!\n", 1);
+			ft_putstr_fd("Error: Invalid map. Map is not rectangular!\n", 1);
 			exit(1);
 		}
 		row_counter++;
@@ -185,7 +185,7 @@ int32_t	ft_is_map_rectangular(char **map)
 	}
 	if (row_counter < 3)
 	{
-		ft_putstr_fd("Error:\nInvalid map. Not enough rows\n", 1);
+		ft_putstr_fd("Error: Invalid map. Not enough rows!\n", 1);
 		exit(1);
 	}
 	return (0);
@@ -207,7 +207,7 @@ int32_t	ft_is_wall_valid(char **map)
 			{
 				if (map[y][x] != '1')
 				{
-					ft_putstr_fd("Error: Map is not closed.\n", 2);
+					ft_putstr_fd("Error: Map is not closed. Check the map!\n", 2);
 					exit (1);
 				}
 				x++;
@@ -218,16 +218,16 @@ int32_t	ft_is_wall_valid(char **map)
 			if (map[y][0] != '1'
 				|| map[y][ft_strlen(map[y]) - 1] != '1')
 			{
-				ft_putstr_fd("Error: Map is not closed.\n", 2);
+				ft_putstr_fd("Error: Map is not closed. Check the map!\n", 2);
 				exit (1);
 			}
 		}
 		y++;
 	}
-	ft_putstr_fd("Map is correctly closed with '1'.\n", 1);
+	ft_putstr_fd("Map is correctly closed.\n", 1);
 }
 
-// Checks if the suffix is valid for the game
+// Check the validity of a map suffix
 int32_t	ft_check_valid_suffix(char *str)
 {
 	char	*suffix;
@@ -239,13 +239,13 @@ int32_t	ft_check_valid_suffix(char *str)
 	str_suf = str + (ft_strlen(str) - ft_strlen(suffix));
 	if (ft_strlen(str) <= ft_strlen(suffix))
 	{
-		ft_putstr_fd("Invalid map name\n", 1);
-		return (0);
+		ft_putstr_fd("Error: Invalid map name! Check the suffix. '*.ber'\n", 2);
+		exit(-1);
 	}
 	if (ft_strncmp(suffix, str_suf, 3) == 0)
-		return(ft_putstr_fd("Map name is correct.\n", 1), 1);
-	ft_putstr_fd("Invalid map name\n", 1);
-	return (0);
+		return(ft_putstr_fd("Map suffix is correct.\n", 1), 1);
+	ft_putstr_fd("Error: Invalid map name! Check the suffix. '*.ber'\n", 2);
+	exit(-1);
 }
 
 

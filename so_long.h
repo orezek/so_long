@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/16 14:37:51 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/16 15:49:38 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,12 @@ int					ft_is_on_collectible(t_game_context *game_context);
 t_exit_position		*ft_get_exit_position(char **map);
 int					ft_end_game(t_game_context *game_context);
 void				ft_get_display_size(t_game_context *game_context);
-void				*ft_array_dup(t_game_context *game_context);
+void				*ft_duplicate_map(t_game_context *game_context);
 void				ft_map_flood(char	**map_to_flood, size_t y, size_t x);
 int32_t				ft_get_no_map_elements(char **map, char char_to_search);
 void				ft_check_map_elements(char **loaded_map, char **flooded_map);
 int32_t				ft_check_valid_suffix(char *str);
 int32_t				ft_is_map_rectangular(char **map);
 int32_t				ft_is_wall_valid(char **map);
+void				ft_check_program_arguments(int32_t argct, const char *argvt[]);
 #endif
