@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 22:20:06 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 22:40:38 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int32_t	ft_is_map_rectangular(char **map)
 		ft_putstr_fd("Error: Invalid map. Not enough rows!\n", 1);
 		exit(1);
 	}
+	ft_putstr_fd("Map si correctly rectangular.\n", 1);
 	return (0);
 }
 
