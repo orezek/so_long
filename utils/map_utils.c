@@ -6,57 +6,12 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/16 15:49:14 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 22:20:06 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-/*
-Todo:
-1) Map checks
-2) Restructuing
-3) Memory deallocation
-4) Norm
-END
-Maybe implement two features
-1) Display move count
-2) Add Gargamel
-*/
-
-
-/*
-Check:
-1) Walls are around the map
-2) One player
-3) One exit
-4) At least one collectible
-5) Player can reach to Exit
-6) All collectibles are reachable by the player
-7) Map is rectangular and valid
-8) Check map suffix
----------------------
-I have:
-1) Load map to an array
-2) Get map size X and Y
-3) Player and Exit coordiantes to start the flood
-4) Get number of collectibles
-
-I need some universal character count of the map. To compare between the orginal and floaded map
-*/
-// creates a duplicate array and moves one coordinate at a time and marks it, the starting position is the player position or the exit position
-// it will mark everthing except wall - it cannot pass the walls
-
-/*
-How to use this?
-
-I load a map, then I get a player position? How, I have game_context. Use that!
-What then? I need a array duplicate to run the fload on. Should I keep a pointer in the game_context?
-Oh, yes. So I need function array dup
-*/
-
-// free game_context->map-
-// free game_context->map->flooded_map
 void	*ft_duplicate_map(t_game_context *game_context)
 {
 	char	**map_dup;
@@ -79,7 +34,7 @@ void	*ft_duplicate_map(t_game_context *game_context)
 	map_dup[counter] = NULL;
 	game_context->map->flooded_map = map_dup;
 }
-// flood the duplicaed map with error checking characters
+
 void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 {
 	if (map_to_flood[y][x] == 'c' || map_to_flood[y][x] == 'e'
@@ -154,7 +109,6 @@ void	ft_check_map_elements(char **loaded_map, char **flooded_map)
 	}
 }
 
-// checks if the map has X bigger then Y - look at Martin's solution
 int32_t	ft_is_map_rectangular(char **map)
 {
 	int32_t		ref;
@@ -191,7 +145,6 @@ int32_t	ft_is_map_rectangular(char **map)
 	return (0);
 }
 
-// Is the map sorouded by walls (1)?
 int32_t	ft_is_wall_valid(char **map)
 {
 	size_t	y;
@@ -227,7 +180,6 @@ int32_t	ft_is_wall_valid(char **map)
 	ft_putstr_fd("Map is correctly closed.\n", 1);
 }
 
-// Check the validity of a map suffix
 int32_t	ft_check_valid_suffix(char *str)
 {
 	char	*suffix;

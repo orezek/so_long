@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/17 22:13:03 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 22:19:01 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
 	ft_get_display_size(game_context);
 	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map->original_map);
-	game_context->game_dimensions->element_size = ft_get_image_size(game_context->game_dimensions->map_size);
+	game_context->game_dimensions->element_size = ft_get_element_size(game_context->game_dimensions->map_size);
 	ft_get_no_collectibles(game_context);
 	mlx = ft_game_init(game_context);
 	game_context->game_images = ft_load_graphics(mlx);
