@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/17 23:14:33 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 23:53:35 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ void	ft_clean_game(mlx_t *mlx, t_game_context *game_context)
 
 void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 {
-	int	fd;
+	int		fd;
+	char	*buf;
 
 	if (argct == 1)
 	{
-		ft_putstr_fd("Error: Add valid map to the game! Format *.ber or use default map 'maps/map.ber'\n", 2);
+		ft_putstr_fd("Error: Add valid map to the game! Format *.ber or use default map 'maps/map.ber'!\n", 2);
 		exit(1);
 	}
 	else if(argct > 2)
@@ -71,7 +72,14 @@ void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 		fd = open(argvt[1], O_RDONLY, 0444);
 		if (fd == -1)
 		{
-			perror("File name or path is not valid!");
+			perror("Error: File name or path is not valid!\n");
+			close(fd);
+			exit(1);
+		}
+
+		if (read(fd, buf, 1) == 0)
+		{
+			ft_putstr_fd("Error: File is empty. Check the file!\n", 2);
 			close(fd);
 			exit(1);
 		}
@@ -91,7 +99,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context = malloc(sizeof(t_game_context));
 	game_context->map = malloc(sizeof(t_map));
 	game_context->map->original_map = map;
-	ft_is_map_rectangular(game_context->map->original_map);
+	ft_validate_map_dimensions(game_context->map->original_map);
 	ft_is_wall_valid(game_context->map->original_map);
 	ft_duplicate_map(game_context);
 	game_context->player = malloc(sizeof(t_player));

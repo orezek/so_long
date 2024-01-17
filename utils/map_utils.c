@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 23:20:57 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 23:46:23 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_check_map_elements(char **loaded_map, char **flooded_map)
 		ft_putstr_fd("Error: some collectibles are not reachable or not found at all\n", 1);
 }
 
-int32_t	ft_is_map_rectangular(char **map)
+int32_t	ft_validate_map_dimensions(char **map)
 {
 	int32_t		ref;
 	int32_t		row_counter;
@@ -67,7 +67,7 @@ int32_t	ft_is_map_rectangular(char **map)
 	ref = ft_strlen(map[0]);
 	if (ref < 5)
 	{
-		ft_putstr_fd("Error: Invalid map. Not enough columns\n", 1);
+		ft_putstr_fd("Error: Map validation failed. Not enough columns\n", 1);
 		exit(1);
 	}
 	map_ptr = map;
@@ -75,7 +75,7 @@ int32_t	ft_is_map_rectangular(char **map)
 	{
 		if (ref != ft_strlen(*map_ptr))
 		{
-			ft_putstr_fd("Error: Invalid map. Map is not rectangular!\n", 1);
+			ft_putstr_fd("Error: Map validation failed. Map is not rectangular!\n", 1);
 			exit(1);
 		}
 		row_counter++;
@@ -83,10 +83,10 @@ int32_t	ft_is_map_rectangular(char **map)
 	}
 	if (row_counter < 3)
 	{
-		ft_putstr_fd("Error: Invalid map. Not enough rows!\n", 1);
+		ft_putstr_fd("Error: Map validation failed. Not enough rows!\n", 1);
 		exit(1);
 	}
-	ft_putstr_fd("Map si correctly rectangular.\n", 1);
+	ft_putstr_fd("Map validation succeeded, map is correctly rectangular.\n", 1);
 	return (0);
 }
 

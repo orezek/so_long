@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/17 23:18:18 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 23:26:26 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void				ft_map_flood(char	**map_to_flood, size_t y, size_t x);
 int32_t				ft_map_char_count(char **map, char char_to_search);
 void				ft_check_map_elements(char **loaded_map, char **flooded_map);
 int32_t				ft_check_file_name(char *str);
-int32_t				ft_is_map_rectangular(char **map);
+int32_t				ft_validate_map_dimensions(char **map);
 int32_t				ft_is_wall_valid(char **map);
 void				ft_check_program_arguments(int32_t argct, const char *argvt[]);
 #endif
