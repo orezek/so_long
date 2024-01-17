@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 22:36:24 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 22:55:10 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	on_wsad_press(mlx_key_data_t k_data, void *param)
 // reacts on window resizing - experimental
 void	on_resize(int32_t width, int32_t height, void *param)
 {
-	ft_printf("On resize: %d\\%d\n", width, height);
+	ft_printf("Current window size: %d:%d\n", width, height);
 }
 
 // functions that are used directly in the event handler (hook)
