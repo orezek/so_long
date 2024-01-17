@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 21:18:26 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 23:11:36 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 23:18:07 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_player_position	*ft_get_player_position(char **map)
 	return (NULL);
 }
 
-int32_t	ft_get_no_map_elements(char **map, char char_to_search)
+int32_t	ft_map_char_count(char **map, char char_to_search)
 {
 	int		x;
 	int		y;

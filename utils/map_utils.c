@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 23:13:49 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 23:20:57 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,22 @@ void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 void	ft_check_map_elements(char **loaded_map, char **flooded_map)
 {
 	if (!loaded_map && !flooded_map)
+	{
 		perror("Maps are invalid:");
-	if (ft_get_no_map_elements(loaded_map, 'E') == 1 && ft_get_no_map_elements(flooded_map, 'e') == 1)
-	{
+		exit(1);
+	}
+	if (ft_map_char_count(loaded_map, 'E') == 1 && ft_map_char_count(flooded_map, 'e') == 1)
 		ft_putstr_fd("Exit is reachagle\n", 1);
-	}
 	else
-	{
 		ft_putstr_fd("Error, exit is not reachable or is more then one\n", 1);
-	}
-	if (ft_get_no_map_elements(loaded_map, 'P') == 1 && ft_get_no_map_elements(flooded_map, 'p') == 1)
-	{
+	if (ft_map_char_count(loaded_map, 'P') == 1 && ft_map_char_count(flooded_map, 'p') == 1)
 		ft_putstr_fd("One player found and can reach the exit\n", 1);
-	}
 	else
-	{
 		ft_putstr_fd("Missing a player or more then one found\n", 1);
-	}
-	if (ft_get_no_map_elements(loaded_map, 'C') >= 1 && ft_get_no_map_elements(loaded_map, 'C') == ft_get_no_map_elements(flooded_map, 'c'))
-	{
+	if (ft_map_char_count(loaded_map, 'C') >= 1 && ft_map_char_count(loaded_map, 'C') == ft_map_char_count(flooded_map, 'c'))
 		ft_putstr_fd("Map has valid number of collectibles\n", 1);
-	}
 	else
-	{
 		ft_putstr_fd("Error: some collectibles are not reachable or not found at all\n", 1);
-	}
 }
 
 int32_t	ft_is_map_rectangular(char **map)
