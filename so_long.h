@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/17 23:26:26 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 00:11:12 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct game_context_s
 	t_exit_position		*exit_position;
 }	t_game_context;
 
-void				ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context);
+void				ft_render_game_map(mlx_t *mlx, t_game_context *game_context);
 void				ft_print_map(char **map);
 t_game_images		*ft_load_images(mlx_t *mlx, t_game_textures *game_textures);
 void				ft_resize_assets(t_game_images *game_images,
@@ -133,7 +133,7 @@ void				on_window_resize(int32_t width, int32_t height,
 						void *param);
 void				ft_clean_game(mlx_t *mlx, t_game_context *game_context);
 t_player_position	*ft_get_player_position(char **map);
-size_t				ft_get_no_collectibles(t_game_context *game_context);
+size_t				ft_count_collectibles(t_game_context *game_context);
 int					ft_is_on_collectible(t_game_context *game_context);
 t_exit_position		*ft_get_exit_position(char **map);
 int					ft_end_game(t_game_context *game_context);
@@ -141,9 +141,9 @@ void				ft_get_display_size(t_game_context *game_context);
 void				*ft_duplicate_map(t_game_context *game_context);
 void				ft_map_flood(char	**map_to_flood, size_t y, size_t x);
 int32_t				ft_map_char_count(char **map, char char_to_search);
-void				ft_check_map_elements(char **loaded_map, char **flooded_map);
+void				ft_verify_game_map(char **loaded_map, char **flooded_map);
 int32_t				ft_check_file_name(char *str);
 int32_t				ft_validate_map_dimensions(char **map);
-int32_t				ft_is_wall_valid(char **map);
+int32_t				ft_check_map_boundary(char **map);
 void				ft_check_program_arguments(int32_t argct, const char *argvt[]);
 #endif

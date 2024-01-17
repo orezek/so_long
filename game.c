@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/17 23:53:35 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 00:13:57 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ mlx_t	*ft_game_init(t_game_context *game_context)
 	return (mlx);
 }
 
-void	ft_clean_game(mlx_t *mlx, t_game_context *game_context)
+void	ft_release_game_resources(mlx_t *mlx, t_game_context *game_context)
 {
 	mlx_close_window(mlx);
 	mlx_terminate(mlx);
@@ -100,12 +100,12 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->map = malloc(sizeof(t_map));
 	game_context->map->original_map = map;
 	ft_validate_map_dimensions(game_context->map->original_map);
-	ft_is_wall_valid(game_context->map->original_map);
+	ft_check_map_boundary(game_context->map->original_map);
 	ft_duplicate_map(game_context);
 	game_context->player = malloc(sizeof(t_player));
 	game_context->player->player_position = ft_get_player_position(game_context->map->original_map);
 	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
-	ft_check_map_elements(game_context->map->original_map, game_context->map->flooded_map);
+	ft_verify_game_map(game_context->map->original_map, game_context->map->flooded_map);
 	game_context->player->player_moves = 0;
 	game_context->exit_position = ft_get_exit_position(game_context->map->original_map);
 	game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
@@ -113,14 +113,14 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_get_display_size(game_context);
 	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map->original_map);
 	game_context->game_dimensions->element_size = ft_get_element_size(game_context->game_dimensions->map_size);
-	ft_get_no_collectibles(game_context);
+	ft_count_collectibles(game_context);
 	mlx = ft_game_init(game_context);
 	game_context->game_images = ft_load_graphics(mlx);
-	ft_add_graph_elm(mlx, game_context);
+	ft_render_game_map(mlx, game_context);
 	mlx_key_hook(mlx, &on_key_press, (void *) game_context);
 	mlx_resize_hook(mlx, &on_window_resize, (void *) game_context);
 	mlx_loop(mlx);
-	ft_clean_game(mlx, game_context);
+	ft_release_game_resources(mlx, game_context);
 	return (EXIT_SUCCESS);
 }
 

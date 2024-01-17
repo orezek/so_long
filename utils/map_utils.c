@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 23:46:23 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 00:09:12 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@ void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 	ft_map_flood(map_to_flood, y, x - 1);
 }
 
-void	ft_check_map_elements(char **loaded_map, char **flooded_map)
+void	ft_verify_game_map(char **loaded_map, char **flooded_map)
 {
 	if (!loaded_map && !flooded_map)
 	{
-		perror("Maps are invalid:");
+		perror("Error: Map Validation failed");
 		exit(1);
 	}
 	if (ft_map_char_count(loaded_map, 'E') == 1 && ft_map_char_count(flooded_map, 'e') == 1)
-		ft_putstr_fd("Exit is reachagle\n", 1);
+		ft_putstr_fd("Success: Single exit is reachable.\n", 1);
 	else
-		ft_putstr_fd("Error, exit is not reachable or is more then one\n", 1);
+		ft_putstr_fd("Error: Exit is either not reachable, missing, or there are multiple exits.\n", 1);
 	if (ft_map_char_count(loaded_map, 'P') == 1 && ft_map_char_count(flooded_map, 'p') == 1)
-		ft_putstr_fd("One player found and can reach the exit\n", 1);
+		ft_putstr_fd("Success: One player found and can reach the exit.\n", 1);
 	else
-		ft_putstr_fd("Missing a player or more then one found\n", 1);
+		ft_putstr_fd("Error: Either no player found, or multiple players detected.\n", 1);
 	if (ft_map_char_count(loaded_map, 'C') >= 1 && ft_map_char_count(loaded_map, 'C') == ft_map_char_count(flooded_map, 'c'))
-		ft_putstr_fd("Map has valid number of collectibles\n", 1);
+		ft_putstr_fd("Success: All collectibles are valid and reachable.\n", 1);
 	else
-		ft_putstr_fd("Error: some collectibles are not reachable or not found at all\n", 1);
+		ft_putstr_fd("Error: some collectibles are not reachable or missing\n", 1);
 }
 
 int32_t	ft_validate_map_dimensions(char **map)
@@ -86,11 +86,11 @@ int32_t	ft_validate_map_dimensions(char **map)
 		ft_putstr_fd("Error: Map validation failed. Not enough rows!\n", 1);
 		exit(1);
 	}
-	ft_putstr_fd("Map validation succeeded, map is correctly rectangular.\n", 1);
+	ft_putstr_fd("Success: Map validation succeeded, map is correctly rectangular.\n", 1);
 	return (0);
 }
 
-int32_t	ft_is_wall_valid(char **map)
+int32_t	ft_check_map_boundary(char **map)
 {
 	size_t	y;
 	size_t	x;
@@ -105,7 +105,7 @@ int32_t	ft_is_wall_valid(char **map)
 			{
 				if (map[y][x] != '1')
 				{
-					ft_putstr_fd("Error: Map is not closed. Check the map!\n", 2);
+					ft_putstr_fd("Error: Map boundary issue. Top or bottom row contains invalid characters.\n", 2);
 					exit (1);
 				}
 				x++;
@@ -116,13 +116,13 @@ int32_t	ft_is_wall_valid(char **map)
 			if (map[y][0] != '1'
 				|| map[y][ft_strlen(map[y]) - 1] != '1')
 			{
-				ft_putstr_fd("Error: Map is not closed. Check the map!\n", 2);
+				ft_putstr_fd("Error: Map boundary issue. Left or right edge is not properly enclosed.\n", 2);
 				exit (1);
 			}
 		}
 		y++;
 	}
-	ft_putstr_fd("Map is correctly closed.\n", 1);
+	ft_putstr_fd("Success: Map boundaries are properly enclosed.\n", 1);
 }
 
 int32_t	ft_check_file_name(char *str)
@@ -140,7 +140,7 @@ int32_t	ft_check_file_name(char *str)
 		exit(-1);
 	}
 	if (ft_strncmp(suffix, str_suf, 3) == 0)
-		return(ft_putstr_fd("Map suffix is correct.\n", 1), 1);
+		return(ft_putstr_fd("Success: Map suffix is correct.\n", 1), 1);
 	ft_putstr_fd("Error: Invalid map name! Check the suffix. '*.ber'\n", 2);
 	exit(-1);
 }

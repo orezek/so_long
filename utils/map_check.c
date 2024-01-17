@@ -6,13 +6,13 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/15 14:21:07 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 00:10:58 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	ft_add_graph_elm(mlx_t *mlx, t_game_context *game_context)
+void	ft_render_game_map(mlx_t *mlx, t_game_context *game_context)
 {
 	t_map_size		*map_size;
 	t_elem_size		*elem_size;
@@ -115,7 +115,7 @@ char	**ft_load_map(char *map_path)
 	return (map);
 }
 
-size_t	ft_get_no_collectibles(t_game_context *game_context)
+size_t	ft_count_collectibles(t_game_context *game_context)
 {
 	int		x;
 	int		y;
