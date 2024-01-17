@@ -6,34 +6,11 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 22:40:38 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 23:13:49 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-void	*ft_duplicate_map(t_game_context *game_context)
-{
-	char	**map_dup;
-	char	**map;
-	size_t	counter;
-	map = game_context->map->original_map;
-
-	counter = 0;
-	while (map[counter] != NULL)
-		counter++;
-	map_dup = malloc(sizeof(char *) * (counter + 1));
-	if(!map_dup)
-		return (NULL);
-	counter = 0;
-	while(map[counter] != NULL)
-	{
-		map_dup[counter] = ft_strdup(map[counter]);
-		counter++;
-	}
-	map_dup[counter] = NULL;
-	game_context->map->flooded_map = map_dup;
-}
 
 void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 {
@@ -53,30 +30,6 @@ void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 	ft_map_flood(map_to_flood, y - 1, x);
 	ft_map_flood(map_to_flood, y, x + 1);
 	ft_map_flood(map_to_flood, y, x - 1);
-}
-
-int32_t	ft_get_no_map_elements(char **map, char char_to_search)
-{
-	int		x;
-	int		y;
-	int		counter;
-
-	counter = 0;
-	if (!map)
-		return (perror("Empty map:"), -1);
-	y = 0;
-	while (map[y] != NULL)
-	{
-		x = 0;
-		while (map[y][x] != '\0')
-		{
-			if (map[y][x] == char_to_search)
-				counter++;
-			x++;
-		}
-		y++;
-	}
-	return (counter);
 }
 
 void	ft_check_map_elements(char **loaded_map, char **flooded_map)
@@ -181,7 +134,7 @@ int32_t	ft_is_wall_valid(char **map)
 	ft_putstr_fd("Map is correctly closed.\n", 1);
 }
 
-int32_t	ft_check_valid_suffix(char *str)
+int32_t	ft_check_file_name(char *str)
 {
 	char	*suffix;
 	char	*str_suf;
