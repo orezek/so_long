@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 00:10:58 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 00:26:09 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,17 @@ char	**ft_load_map(char *map_path)
 	tmp_ptr = NULL;
 	map_str = malloc(1);
 	if(!map_str)
-		return (perror("Map str malloc failed"), NULL);
+		return (perror("Error: Map str malloc failed\n"), NULL);
 	map_str[0] = '\0';
 	fd = open(map_path, O_RDONLY, 0444);
 	if (fd == -1)
-		return (free(map_str), ("Map reading failed"), NULL);
+		return (free(map_str), ("Error: Map reading failed\n"), NULL);
 	while(line = ft_get_next_line(fd))
 	{
 		tmp_ptr = map_str;
 		map_str = ft_strjoin(tmp_ptr, line);
 		if (!map_str)
-			return (free(line), free(tmp_ptr), perror("Map lines error"), NULL);
+			return (free(line), free(tmp_ptr), perror("Error: Map lines error\n"), NULL);
 		free(line);
 		free(tmp_ptr);
 	}
@@ -146,7 +146,7 @@ size_t	ft_count_collectibles(t_game_context *game_context)
 }
 
 
-int	ft_is_on_collectible(t_game_context *game_context)
+int	ft_check_collectibles(t_game_context *game_context)
 {
 	int	x_col;
 	int	y_col;
@@ -166,7 +166,6 @@ int	ft_is_on_collectible(t_game_context *game_context)
 			}
 		i++;
 	}
-	//ft_printf("No remaining col: %d\n", game_context->collectables->remaining_collectables);
 	return (0);
 }
 
