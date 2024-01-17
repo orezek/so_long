@@ -6,29 +6,27 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/15 20:53:19 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/17 22:36:24 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-// on escape press
 void	on_esc_press(mlx_key_data_t k_data, void *param)
 {
+	extern mlx_t	*mlx;
+
 	if (k_data.key == MLX_KEY_ESCAPE && k_data.action == MLX_PRESS)
 	{
-		extern mlx_t	*mlx;
-		ft_printf("%s\n", "ESC Pressed");
 		mlx_close_window(mlx);
 	}
 }
 
-void on_wsad_press(mlx_key_data_t k_data, void *param)
+void	on_wsad_press(mlx_key_data_t k_data, void *param)
 {
 	t_game_context	*game_context;
 
 	game_context = (t_game_context *) param;
-
 	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y -1][game_context->player->player_position->x] != '1')
 	{
 		game_context->game_images->player->instances[0].y -= (game_context->game_dimensions->element_size->height);
@@ -66,11 +64,11 @@ void on_wsad_press(mlx_key_data_t k_data, void *param)
 		ft_end_game(game_context);
 	}
 }
+
 // reacts on window resizing - experimental
 void	on_resize(int32_t width, int32_t height, void *param)
 {
 	ft_printf("On resize: %d\\%d\n", width, height);
-
 }
 
 // functions that are used directly in the event handler (hook)
@@ -79,6 +77,7 @@ void	on_key_press(mlx_key_data_t k_data, void *param)
 	on_esc_press(k_data, param);
 	on_wsad_press(k_data, param);
 }
+
 // test resize event
 void	on_window_resize(int32_t width, int32_t height, void *param)
 {
