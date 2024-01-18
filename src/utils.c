@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:31:52 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 10:12:59 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 15:14:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ int	ft_free_array(char **array)
 	return (0);
 }
 
-void	ft_get_display_size(t_game_context *game_context)
-{
-	mlx_get_monitor_size(0, &game_context->game_dimensions->display_size->width,
-		&game_context->game_dimensions->display_size->height);
-}
 
 void	*ft_duplicate_map(t_game_context *game_context)
 {
@@ -71,4 +66,23 @@ void	ft_print_map(char **map)
 		tmp_ptr++;
 		ft_putchar_fd('\n', 1);
 	}
+}
+
+void	ft_release_game_resources(t_game_context *game_context)
+{
+	mlx_close_window(game_context->mlx);
+	mlx_terminate(game_context->mlx);
+	free(game_context->player->player_position);
+	free(game_context->player);
+	free(game_context->exit_position);
+	ft_free_array(game_context->map->original_map);
+	ft_free_array(game_context->map->flooded_map);
+	free(game_context->game_dimensions->display_size);
+	free(game_context->game_dimensions->map_size);
+	free(game_context->game_dimensions->element_size);
+	free(game_context->game_dimensions);
+	free(game_context->collectables);
+	free(game_context->game_images);
+	free(game_context->map);
+	free(game_context);
 }

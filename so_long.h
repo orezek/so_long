@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 09:52:23 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 15:17:54 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,6 @@ void				ft_verify_game_map(char **loaded_map, char **flooded_map);
 int32_t				ft_check_file_name(char *str);
 int32_t				ft_validate_map_dimensions(char **map);
 int32_t				ft_check_map_boundary(char **map);
-void				ft_check_program_arguments(int32_t argct, const char *argvt[]);
+void				ft_check_program_arguments(int32_t argct,
+						const char *argvt[]);
 #endif

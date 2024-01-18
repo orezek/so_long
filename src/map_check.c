@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 09:54:11 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 15:16:46 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,26 +146,5 @@ size_t	ft_count_collectibles(t_game_context *game_context)
 }
 
 
-int	ft_check_collectibles(t_game_context *game_context)
-{
-	int	x_col;
-	int	y_col;
-	int	i;
 
-	i = 0;
-	while (i < game_context->collectables->no_collectables)
-	{
-		x_col = game_context->game_images->collectible->instances[i].x;
-		y_col = game_context->game_images->collectible->instances[i].y;
-		if (x_col == game_context->player->player_position->x * game_context->game_dimensions->element_size->width &&
-			y_col == game_context->player->player_position->y * game_context->game_dimensions->element_size->height &&
-			game_context->game_images->collectible->instances[i].enabled == 1)
-			{
-				game_context->game_images->collectible->instances[i].enabled = 0;
-				game_context->collectables->remaining_collectables -= 1;
-			}
-		i++;
-	}
-	return (0);
-}
 

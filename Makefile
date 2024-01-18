@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS =
 
 # Directories
-SRC_DIR = ./utils
+SRC_DIR = ./src
 OBJ_DIR = ./obj
 LIBFT_DIR = ./libft
 MLX_DIR = ./mlx42
