@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:31:52 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 15:32:33 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 15:48:05 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,10 @@ void	ft_release_game_resources(t_game_context *game_context)
 	free(game_context->game_images);
 	free(game_context->map);
 	free(game_context);
+}
+
+void	ft_print_error(char *error_str)
+{
+	ft_putstr_fd(error_str, 2);
+	exit (1);
 }

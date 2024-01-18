@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 00:09:12 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 15:55:52 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,22 @@ void	ft_verify_game_map(char **loaded_map, char **flooded_map)
 		perror("Error: Map Validation failed");
 		exit(1);
 	}
-	if (ft_map_char_count(loaded_map, 'E') == 1 && ft_map_char_count(flooded_map, 'e') == 1)
+	if (ft_map_char_count(loaded_map, 'E') == 1
+		&& ft_map_char_count(flooded_map, 'e') == 1)
 		ft_putstr_fd("Success: Single exit is reachable.\n", 1);
 	else
-		ft_putstr_fd("Error: Exit is either not reachable, missing, or there are multiple exits.\n", 1);
-	if (ft_map_char_count(loaded_map, 'P') == 1 && ft_map_char_count(flooded_map, 'p') == 1)
+		ft_putstr_fd("Error: Exit is either not reachable or missing.\n", 1);
+	if (ft_map_char_count(loaded_map, 'P') == 1
+		&& ft_map_char_count(flooded_map, 'p') == 1)
 		ft_putstr_fd("Success: One player found and can reach the exit.\n", 1);
 	else
-		ft_putstr_fd("Error: Either no player found, or multiple players detected.\n", 1);
-	if (ft_map_char_count(loaded_map, 'C') >= 1 && ft_map_char_count(loaded_map, 'C') == ft_map_char_count(flooded_map, 'c'))
+		ft_putstr_fd("Error: Not valid path to the exit.\n", 1);
+	if (ft_map_char_count(loaded_map, 'C') >= 1
+		&& ft_map_char_count(loaded_map, 'C')
+		== ft_map_char_count(flooded_map, 'c'))
 		ft_putstr_fd("Success: All collectibles are valid and reachable.\n", 1);
 	else
-		ft_putstr_fd("Error: some collectibles are not reachable or missing\n", 1);
+		ft_putstr_fd("Error: some collectibles are not reachable\n", 1);
 }
 
 int32_t	ft_validate_map_dimensions(char **map)
@@ -59,34 +63,26 @@ int32_t	ft_validate_map_dimensions(char **map)
 	int32_t		row_counter;
 	char		**map_ptr;
 
-
 	ref = 0;
 	row_counter = 0;
-	if(!map)
+	if (!map)
 		return (1);
 	ref = ft_strlen(map[0]);
 	if (ref < 5)
-	{
-		ft_putstr_fd("Error: Map validation failed. Not enough columns\n", 1);
-		exit(1);
-	}
+		ft_print_error("Error: Map validation failed. Not enough columns\n");
 	map_ptr = map;
 	while (*map_ptr)
 	{
 		if (ref != ft_strlen(*map_ptr))
-		{
-			ft_putstr_fd("Error: Map validation failed. Map is not rectangular!\n", 1);
-			exit(1);
-		}
+			ft_print_error
+			("Error: Map validation failed. Map is not rectangular!\n");
 		row_counter++;
 		map_ptr++;
 	}
 	if (row_counter < 3)
-	{
-		ft_putstr_fd("Error: Map validation failed. Not enough rows!\n", 1);
-		exit(1);
-	}
-	ft_putstr_fd("Success: Map validation succeeded, map is correctly rectangular.\n", 1);
+		ft_print_error("Error: Map validation failed. Not enough rows!");
+	ft_putstr_fd
+	("Success: Map validation succeeded, map is correctly rectangular.\n", 1);
 	return (0);
 }
 
@@ -104,10 +100,7 @@ int32_t	ft_check_map_boundary(char **map)
 			while (map[y][x])
 			{
 				if (map[y][x] != '1')
-				{
-					ft_putstr_fd("Error: Map boundary issue. Top or bottom row contains invalid characters.\n", 2);
-					exit (1);
-				}
+					ft_print_error("Error: Map boundary issue.\n");
 				x++;
 			}
 		}
@@ -115,10 +108,7 @@ int32_t	ft_check_map_boundary(char **map)
 		{
 			if (map[y][0] != '1'
 				|| map[y][ft_strlen(map[y]) - 1] != '1')
-			{
-				ft_putstr_fd("Error: Map boundary issue. Left or right edge is not properly enclosed.\n", 2);
-				exit (1);
-			}
+				ft_print_error("Error: Map boundary issue.\n");
 		}
 		y++;
 	}
@@ -140,9 +130,7 @@ int32_t	ft_check_file_name(char *str)
 		exit(-1);
 	}
 	if (ft_strncmp(suffix, str_suf, 3) == 0)
-		return(ft_putstr_fd("Success: Map suffix is correct.\n", 1), 1);
+		return (ft_putstr_fd("Success: Map suffix is correct.\n", 1), 1);
 	ft_putstr_fd("Error: Invalid map name! Check the suffix. '*.ber'\n", 2);
 	exit(-1);
 }
-
-
