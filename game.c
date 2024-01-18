@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 01:03:39 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:13:57 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ mlx_t	*ft_game_init(t_game_context *game_context)
 	int				width;
 	int				height;
 
-	width = game_context->game_dimensions->element_size->width * game_context->game_dimensions->map_size->width;
-	height = game_context->game_dimensions->element_size->height * game_context->game_dimensions->map_size->height;
-	mlx = mlx_init(width, height, "Game of Hearts", true);
+	//width = game_context->game_dimensions->element_size->width * game_context->game_dimensions->map_size->width;
+	//height = game_context->game_dimensions->element_size->height * game_context->game_dimensions->map_size->height;
+	mlx = mlx_init(1, 1, "Game of Hearts", true);
 	if (!mlx)
 		return (NULL);
 	return (mlx);
@@ -112,10 +112,12 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
 	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map->original_map);
-	game_context->game_dimensions->element_size = ft_get_element_size(game_context->game_dimensions->map_size);
 	ft_count_collectibles(game_context);
 	mlx = ft_game_init(game_context);
 	ft_get_display_size(game_context);
+	game_context->game_dimensions->element_size = ft_get_element_size(game_context->game_dimensions->map_size);
+	mlx_set_window_size(mlx, game_context->game_dimensions->element_size->width * game_context->game_dimensions->map_size->width,
+	game_context->game_dimensions->element_size->height * game_context->game_dimensions->map_size->height);
 	game_context->game_images = ft_load_graphics(mlx);
 	ft_render_game_map(mlx, game_context);
 	mlx_key_hook(mlx, &on_key_press, (void *) game_context);
