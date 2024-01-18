@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:19:20 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 23:04:32 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:25:22 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,33 @@ t_game_images	*ft_load_graphics(mlx_t *mlx)
 	return (game_images);
 }
 
-t_elem_size	*ft_get_element_size(t_map_size *map_size)
+// t_elem_size	*ft_get_element_size(t_map_size *map_size)
+// {
+// 	t_elem_size 	*elem_size;
+
+// 	elem_size = malloc(sizeof(t_elem_size));
+// 	if (!elem_size)
+// 		return (NULL);
+// 	elem_size->width = 1440 / map_size->width;
+// 	elem_size->height = 960 / map_size->height;
+// 	return (elem_size);
+// }
+
+void	ft_get_element_size(t_game_context *game_context)
 {
 	t_elem_size 	*elem_size;
+	t_map_size		*map_size;
+	t_display_size	*display_size;
 
+	if (!game_context->game_dimensions->map_size ||
+	!game_context->game_dimensions->display_size)
+		exit(1);
 	elem_size = malloc(sizeof(t_elem_size));
 	if (!elem_size)
-		return (NULL);
-	elem_size->width = 1440 / map_size->width;
-	elem_size->height = 960 / map_size->height;
-	return (elem_size);
+		exit (1);
+	game_context->game_dimensions->element_size = elem_size;
+	map_size = game_context->game_dimensions->map_size;
+	display_size = game_context->game_dimensions->display_size;
+	elem_size->width = (display_size->width - 120) / map_size->width;
+	elem_size->height = (display_size->height - 96) / map_size->height;
 }
