@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 23:15:58 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 23:22:23 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,72 +77,37 @@ void	ft_get_map_size(t_game_context *game)
 	}
 }
 
-// loads the map string into 2d array for further processing
-char	**ft_load_map(char *map_path)
-{
-	int		fd;
-	char	*line;
-	char	*map_str;
-	char	*tmp_ptr;
-	char	**map;
-
-	map = NULL;
-	line = NULL;
-	tmp_ptr = NULL;
-	map_str = malloc(1);
-	if (!map_str)
-		return (perror("Error: Map str malloc failed\n"), NULL);
-	map_str[0] = '\0';
-	fd = open(map_path, O_RDONLY, 0444);
-	if (fd == -1)
-		return (free(map_str), perror("Error: Map reading failed\n"), NULL);
-	line = ft_get_next_line(fd);
-	while (line)
-	{
-		tmp_ptr = map_str;
-		map_str = ft_strjoin(tmp_ptr, line);
-		if (!map_str)
-			return (free(line), free(tmp_ptr), free(map_str), perror("Error: Map lines error\n"), NULL);
-		free(line);
-		free(tmp_ptr);
-		line = ft_get_next_line(fd);
-	}
-	map = ft_split(map_str, '\n');
-	free(map_str);
-	close(fd);
-	return (map);
-}
-
 void	ft_read_line(int fd, char **map_str)
 {
 	char	*tmp_ptr;
 	char	*line;
 
 	line = NULL;
+	tmp_ptr = NULL;
 	line = ft_get_next_line(fd);
 	while (line)
 	{
 		tmp_ptr = *map_str;
 		*map_str = ft_strjoin(tmp_ptr, line);
 		if (!map_str)
-			return (free(line), free(tmp_ptr), free(map_str), perror("Error: Map lines error\n"), NULL);
+		{
+			free(line);
+			free(tmp_ptr);
+			free(map_str);
+			perror("Error: Map lines error\n");
+		}
 		free(line);
 		free(tmp_ptr);
 		line = ft_get_next_line(fd);
 	}
-
 }
 
-char	**ft_load_map_v1(char *map_path)
+char	**ft_load_map(char *map_path)
 {
 	int		fd;
-	char	*line;
 	char	*map_str;
-	char	*tmp_ptr;
 	char	**map;
 
-	line = NULL;
-	tmp_ptr = NULL;
 	map_str = malloc(1);
 	if (!map_str)
 		return (perror("Error: Map str malloc failed\n"), NULL);

@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 23:07:26 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 23:23:06 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ void				ft_resize_assets(t_game_images *game_images,
 t_game_textures		*ft_load_textures(void);
 void				ft_del_textures(t_game_textures *game_textures);
 void				ft_set_elem_size(t_game_context *game_context);
-char				**ft_load_map(char *map_path);
 t_game_images		*ft_load_graphics(mlx_t *mlx);
 void				ft_game_init(t_game_context *game_context);
 int					ft_free_array(char **array);
@@ -154,5 +153,6 @@ void				ft_handle_w_key_press(t_game_context *game);
 void				ft_handle_s_key_press(t_game_context *game);
 void				ft_handle_a_key_press(t_game_context *game);
 void				ft_handle_d_key_press(t_game_context *game);
-char				**ft_load_map_v1(char *map_path);
+char				**ft_load_map(char *map_path);
+void				ft_read_line(int fd, char **map_str);
 #endif

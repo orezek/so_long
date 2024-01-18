@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 23:07:39 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 23:20:35 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int32_t	main(int32_t argc, const char *argv[])
 
 	ft_check_program_arguments(argc, argv);
 	ft_check_file_name((char *)argv[1]);
-	map = ft_load_map_v1((char *)argv[1]);
+	map = ft_load_map((char *)argv[1]);
 	game_context = malloc(sizeof(t_game_context));
 	game_context->map = malloc(sizeof(t_map));
 	game_context->map->original_map = map;
