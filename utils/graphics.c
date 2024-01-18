@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:19:20 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 09:33:27 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:23:26 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ void	ft_set_elem_size(t_game_context *game_context)
 	elem_size = malloc(sizeof(t_elem_size));
 	if (!elem_size)
 		exit (1);
-	game_context->game_dimensions->element_size = elem_size;
 	map_size = game_context->game_dimensions->map_size;
 	display_size = game_context->game_dimensions->display_size;
 	elem_size->width = (display_size->width - 120) / map_size->width;
 	elem_size->height = (display_size->height - 96) / map_size->height;
+	game_context->game_dimensions->element_size = elem_size;
 }

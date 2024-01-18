@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 21:18:26 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 23:18:07 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:57:14 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,12 @@ int32_t	ft_map_char_count(char **map, char char_to_search)
 
 int	ft_end_game(t_game_context *game_context)
 {
-	extern mlx_t	*mlx;
 	if (game_context->player->player_position->x == game_context->exit_position->x &&
 		game_context->player->player_position->y == game_context->exit_position->y &&
 		game_context->collectables->remaining_collectables == 0)
 		{
 			ft_printf("%s\n", "Exit Reached");
-			mlx_close_window(mlx);
+			mlx_close_window(game_context->mlx);
 			return (0);
 		}
 	return(1);

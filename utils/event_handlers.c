@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 00:27:40 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:56:25 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	on_esc_press(mlx_key_data_t k_data, void *param)
 {
-	extern mlx_t	*mlx;
+	t_game_context	*game_context;
+
+	game_context = (t_game_context *) param;
 
 	if (k_data.key == MLX_KEY_ESCAPE && k_data.action == MLX_PRESS)
 	{
-		mlx_close_window(mlx);
+		mlx_close_window(game_context->mlx);
 	}
 }
 

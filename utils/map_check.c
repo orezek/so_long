@@ -6,13 +6,13 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 00:26:09 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:54:11 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	ft_render_game_map(mlx_t *mlx, t_game_context *game_context)
+void	ft_render_game_map(t_game_context *game_context)
 {
 	t_map_size		*map_size;
 	t_elem_size		*elem_size;
@@ -25,7 +25,7 @@ void	ft_render_game_map(mlx_t *mlx, t_game_context *game_context)
 	elem_size = game_context->game_dimensions->element_size;
 	map_size = game_context->game_dimensions->map_size;
 	game_images = game_context->game_images;
-	mlx_image_to_window(mlx, game_images->space, 0, 0);
+	mlx_image_to_window(game_context->mlx, game_images->space, 0, 0);
 	ft_resize_assets(game_images, game_context->game_dimensions->element_size);
 	//height from top to buttom
 	y = 0;
@@ -36,13 +36,13 @@ void	ft_render_game_map(mlx_t *mlx, t_game_context *game_context)
 		while(x < map_size->width)
 		{
 			if (map[y][x] == '1')
-				mlx_image_to_window(mlx, game_images->wall, x * elem_size->width, y * elem_size->height);
+				mlx_image_to_window(game_context->mlx, game_images->wall, x * elem_size->width, y * elem_size->height);
 			else if (map[y][x] == 'P')
-				mlx_image_to_window(mlx, game_images->player, x * elem_size->width, y * elem_size->height);
+				mlx_image_to_window(game_context->mlx, game_images->player, x * elem_size->width, y * elem_size->height);
 			else if (map[y][x]== 'E')
-				mlx_image_to_window(mlx, game_images->exit, x * elem_size->width, y * elem_size->height);
+				mlx_image_to_window(game_context->mlx, game_images->exit, x * elem_size->width, y * elem_size->height);
 			else if (map[y][x] == 'C')
-				mlx_image_to_window(mlx, game_images->collectible, x * elem_size->width, y * elem_size->height);
+				mlx_image_to_window(game_context->mlx, game_images->collectible, x * elem_size->width, y * elem_size->height);
 			x++;
 		}
 		y++;

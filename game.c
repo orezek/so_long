@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 09:42:55 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:38:56 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,20 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// global variable
-mlx_t	*mlx;
-
-mlx_t	*ft_game_init(t_game_context *game_context)
+void	ft_game_init(t_game_context *game_context)
 {
-	extern mlx_t	*mlx;
+	mlx_t	*mlx;
 
 	mlx = mlx_init(1, 1, "Game of Hearts", true);
 	if (!mlx)
-		return (NULL);
-	return (mlx);
+		exit(1);
+	game_context->mlx = mlx;
 }
 
-void	ft_release_game_resources(mlx_t *mlx, t_game_context *game_context)
+void	ft_release_game_resources(t_game_context *game_context)
 {
-	mlx_close_window(mlx);
-	mlx_terminate(mlx);
+	mlx_close_window(game_context->mlx);
+	mlx_terminate(game_context->mlx);
 	free(game_context->player->player_position);
 	free(game_context->player);
 	free(game_context->exit_position);
@@ -89,17 +86,22 @@ void	ft_set_window_size(t_game_context *game_context)
 	int32_t	width;
 	int32_t	height;
 
+	width = 0;
+	height = 0;
+
 	width = game_context->game_dimensions->element_size->width *
 		game_context->game_dimensions->map_size->width;
 	height = game_context->game_dimensions->element_size->height *
 		game_context->game_dimensions->map_size->height;
-	mlx_set_window_size(mlx, width, height);
+
+	if (!game_context->mlx)
+		exit(1);
+	mlx_set_window_size(game_context->mlx, width, height);
 }
 
 int32_t	main(int32_t argc, const char *argv[])
 {
 	t_game_context	*game_context;
-	extern mlx_t	*mlx;
 	char			**map;
 
 	ft_check_program_arguments(argc, argv);
@@ -121,16 +123,16 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
 	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map->original_map);
 	ft_count_collectibles(game_context);
-	mlx = ft_game_init(game_context);
+	ft_game_init(game_context);
 	ft_get_display_size(game_context);
 	ft_set_elem_size(game_context);
 	ft_set_window_size(game_context);
-	game_context->game_images = ft_load_graphics(mlx);
-	ft_render_game_map(mlx, game_context);
-	mlx_key_hook(mlx, &on_key_press, (void *) game_context);
-	mlx_resize_hook(mlx, &on_window_resize, (void *) game_context);
-	mlx_loop(mlx);
-	ft_release_game_resources(mlx, game_context);
+	game_context->game_images = ft_load_graphics(game_context->mlx);
+	ft_render_game_map(game_context);
+	mlx_key_hook(game_context->mlx, &on_key_press, (void *) game_context);
+	mlx_resize_hook(game_context->mlx, &on_window_resize, (void *) game_context);
+	mlx_loop(game_context->mlx);
+	ft_release_game_resources(game_context);
 	return (EXIT_SUCCESS);
 }
 

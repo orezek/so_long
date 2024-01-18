@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:31:52 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/17 23:12:36 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:12:59 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	*ft_duplicate_map(t_game_context *game_context)
 	char	**map;
 	size_t	counter;
 	map = game_context->map->original_map;
-
 	counter = 0;
 	while (map[counter] != NULL)
 		counter++;
