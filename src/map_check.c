@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 19:37:00 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 19:38:39 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_count_collectibles(t_game_context *game)
 	game->collectables->remaining_collectables = 0;
 	map = game->map->original_map;
 	y = 0;
-	while (map[y] != NULL)
+	while (map[y])
 	{
 		x = 0;
 		while (map[y][x] != '\0')
