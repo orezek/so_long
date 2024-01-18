@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:59:47 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 19:54:59 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 20:08:47 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,44 +17,34 @@ void	on_esc_press(mlx_key_data_t k_data, void *param)
 	t_game_context	*game_context;
 
 	game_context = (t_game_context *) param;
-
 	if (k_data.key == MLX_KEY_ESCAPE && k_data.action == MLX_PRESS)
 	{
 		mlx_close_window(game_context->mlx);
-		ft_putstr_fd("Game Exited on ESC Press", 1);
+		ft_putstr_fd("Game Exited on ESC Press\n", 1);
 	}
 }
 
 void	on_wsad_press(mlx_key_data_t k_data, void *param)
 {
-	t_game_context	*game_context;
+	t_game_context	*game;
 
-	game_context = (t_game_context *) param;
-	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y -1][game_context->player->player_position->x] != '1')
-	{
-
-		game_context->game_images->player->instances[0].y -= (game_context->game_dimensions->element_size->height);
-		game_context->player->player_position->y -= 1;
-		ft_handle_key_press(game_context);
-	}
-	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y + 1][game_context->player->player_position->x] != '1')
-	{
-		game_context->game_images->player->instances[0].y += (game_context->game_dimensions->element_size->height);
-		game_context->player->player_position->y += 1;
-		ft_handle_key_press(game_context);
-	}
-	else if (k_data.key == MLX_KEY_A && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y][game_context->player->player_position->x - 1] != '1')
-	{
-		game_context->game_images->player->instances[0].x -= (game_context->game_dimensions->element_size->width);
-		game_context->player->player_position->x -= 1;
-		ft_handle_key_press(game_context);
-	}
-	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS && game_context->map->original_map[game_context->player->player_position->y][game_context->player->player_position->x + 1] != '1')
-	{
-		game_context->game_images->player->instances[0].x += (game_context->game_dimensions->element_size->width);
-		game_context->player->player_position->x += 1;
-		ft_handle_key_press(game_context);
-	}
+	game = (t_game_context *) param;
+	if (k_data.key == MLX_KEY_W && k_data.action == MLX_PRESS
+		&& game->map->original_map[game->player->player_position->y -1]
+		[game->player->player_position->x] != '1')
+		ft_handle_w_key_press(game);
+	else if (k_data.key == MLX_KEY_S && k_data.action == MLX_PRESS
+		&& game->map->original_map[game->player->player_position->y + 1]
+		[game->player->player_position->x] != '1')
+		ft_handle_s_key_press(game);
+	else if (k_data.key == MLX_KEY_A && k_data.action == MLX_PRESS
+		&& game->map->original_map[game->player->player_position->y]
+		[game->player->player_position->x - 1] != '1')
+		ft_handle_a_key_press(game);
+	else if (k_data.key == MLX_KEY_D && k_data.action == MLX_PRESS
+		&& game->map->original_map[game->player->player_position->y]
+		[game->player->player_position->x + 1] != '1')
+		ft_handle_d_key_press(game);
 }
 
 void	on_resize(int32_t width, int32_t height, void *param)
