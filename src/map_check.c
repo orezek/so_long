@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 19:21:25 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 19:37:00 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ char	**ft_load_map(char *map_path)
 	line = NULL;
 	tmp_ptr = NULL;
 	map_str = malloc(1);
-	if(!map_str)
+	if (!map_str)
 		return (perror("Error: Map str malloc failed\n"), NULL);
 	map_str[0] = '\0';
 	fd = open(map_path, O_RDONLY, 0444);
 	if (fd == -1)
 		return (free(map_str), ("Error: Map reading failed\n"), NULL);
-	while(line = ft_get_next_line(fd))
+	while (line = ft_get_next_line(fd))
 	{
 		tmp_ptr = map_str;
 		map_str = ft_strjoin(tmp_ptr, line);
@@ -111,20 +111,18 @@ char	**ft_load_map(char *map_path)
 	return (map);
 }
 
-size_t	ft_count_collectibles(t_game_context *game_context)
+void	ft_count_collectibles(t_game_context *game)
 {
 	int		x;
 	int		y;
 	char	**map;
 
-	game_context->collectables = malloc(sizeof(t_collectable));
-	if(!game_context->collectables)
-		return (1);
-	game_context->collectables->no_collectables = 0;
-	game_context->collectables->remaining_collectables = 0;
-	map = game_context->map->original_map;
-	if (!map)
-		return (1);
+	game->collectables = malloc(sizeof(t_collectable));
+	if (!game->collectables)
+		exit (1);
+	game->collectables->no_collectables = 0;
+	game->collectables->remaining_collectables = 0;
+	map = game->map->original_map;
 	y = 0;
 	while (map[y] != NULL)
 	{
@@ -132,15 +130,11 @@ size_t	ft_count_collectibles(t_game_context *game_context)
 		while (map[y][x] != '\0')
 		{
 			if (map[y][x] == 'C')
-				game_context->collectables->no_collectables++;
+				game->collectables->no_collectables++;
 			x++;
 		}
 		y++;
 	}
-	game_context->collectables->remaining_collectables = game_context->collectables->no_collectables;
-	return (0);
+	game->collectables->remaining_collectables
+		= game->collectables->no_collectables;
 }
-
-
-
-
