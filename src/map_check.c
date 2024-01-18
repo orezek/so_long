@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 18:44:26 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 19:21:25 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,38 +53,30 @@ void	ft_render_game_map(t_game_context *game)
 	}
 }
 
-t_map_size	*ft_get_map_size(char **map)
+void	ft_get_map_size(t_game_context *game)
 {
-	t_map_size	*map_size;
 	char		**temp_map;
 	char		*temp_row;
-	int			x;
-	int			y;
 
-	temp_map = map;
-	map_size = malloc(sizeof(t_map_size));
-	if (!map_size)
-		return (NULL);
-	y = 0;
+	temp_map = game->map->original_map;
+	game->game_dimensions->map_size = malloc(sizeof(t_map_size));
+	if (!game->game_dimensions->map_size)
+		exit(1);
+	game->game_dimensions->map_size->height = 0;
+	game->game_dimensions->map_size->width = 0;
 	while (*temp_map)
 	{
-		if (y == 0)
+		if (game->game_dimensions->map_size->height == 0)
 		{
-			x = 0;
 			temp_row = *temp_map;
-			while (*temp_row)
-			{
-				x++;
-				temp_row++;
-			}
+			while (*temp_row++)
+				game->game_dimensions->map_size->width++;
 		}
-		y++;
+		game->game_dimensions->map_size->height++;
 		temp_map++;
 	}
-	map_size->width = x;
-	map_size->height = y;
-	return (map_size);
 }
+
 // loads the map string into 2d array for further processing
 char	**ft_load_map(char *map_path)
 {

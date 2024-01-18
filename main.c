@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 15:28:56 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 19:22:43 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->exit_position = ft_get_exit_position(game_context->map->original_map);
 	game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
-	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map->original_map);
+	ft_get_map_size(game_context);
 	ft_count_collectibles(game_context);
 	ft_game_init(game_context);
 	ft_get_display_size(game_context);
