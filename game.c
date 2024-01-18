@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 00:13:57 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 01:03:39 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void	ft_release_game_resources(mlx_t *mlx, t_game_context *game_context)
 void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 {
 	int		fd;
-	char	*buf;
+	char	buf[1];
 
+	ft_memset(buf, 0, sizeof(buf));
 	if (argct == 1)
 	{
 		ft_putstr_fd("Error: Add valid map to the game! Format *.ber or use default map 'maps/map.ber'!\n", 2);
@@ -110,11 +111,11 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->exit_position = ft_get_exit_position(game_context->map->original_map);
 	game_context->game_dimensions = malloc(sizeof(t_game_dimensions));
 	game_context->game_dimensions->display_size = malloc(sizeof(t_display_size));
-	ft_get_display_size(game_context);
 	game_context->game_dimensions->map_size = ft_get_map_size(game_context->map->original_map);
 	game_context->game_dimensions->element_size = ft_get_element_size(game_context->game_dimensions->map_size);
 	ft_count_collectibles(game_context);
 	mlx = ft_game_init(game_context);
+	ft_get_display_size(game_context);
 	game_context->game_images = ft_load_graphics(mlx);
 	ft_render_game_map(mlx, game_context);
 	mlx_key_hook(mlx, &on_key_press, (void *) game_context);
