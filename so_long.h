@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 19:33:25 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 19:50:42 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,4 +149,5 @@ void				ft_check_program_arguments(int32_t argct,
 						const char *argvt[]);
 void				ft_print_error(char *error_str);
 void				ft_get_map_size(t_game_context *game);
+void				ft_handle_key_press(t_game_context *game);
 #endif
