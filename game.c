@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 09:24:48 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:33:52 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@ mlx_t	*mlx;
 mlx_t	*ft_game_init(t_game_context *game_context)
 {
 	extern mlx_t	*mlx;
-	int				width;
-	int				height;
 
-	//width = game_context->game_dimensions->element_size->width * game_context->game_dimensions->map_size->width;
-	//height = game_context->game_dimensions->element_size->height * game_context->game_dimensions->map_size->height;
 	mlx = mlx_init(1, 1, "Game of Hearts", true);
 	if (!mlx)
 		return (NULL);
@@ -115,7 +111,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_count_collectibles(game_context);
 	mlx = ft_game_init(game_context);
 	ft_get_display_size(game_context);
-	ft_get_element_size(game_context);
+	ft_set_elem_size(game_context);
 	mlx_set_window_size(mlx, game_context->game_dimensions->element_size->width * game_context->game_dimensions->map_size->width,
 	game_context->game_dimensions->element_size->height * game_context->game_dimensions->map_size->height);
 	game_context->game_images = ft_load_graphics(mlx);

@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:19:20 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 09:25:22 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:33:27 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_game_images	*ft_load_graphics(mlx_t *mlx)
 // 	return (elem_size);
 // }
 
-void	ft_get_element_size(t_game_context *game_context)
+void	ft_set_elem_size(t_game_context *game_context)
 {
 	t_elem_size 	*elem_size;
 	t_map_size		*map_size;
