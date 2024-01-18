@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 09:33:52 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 09:42:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,18 @@ void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 	}
 }
 
+void	ft_set_window_size(t_game_context *game_context)
+{
+	int32_t	width;
+	int32_t	height;
+
+	width = game_context->game_dimensions->element_size->width *
+		game_context->game_dimensions->map_size->width;
+	height = game_context->game_dimensions->element_size->height *
+		game_context->game_dimensions->map_size->height;
+	mlx_set_window_size(mlx, width, height);
+}
+
 int32_t	main(int32_t argc, const char *argv[])
 {
 	t_game_context	*game_context;
@@ -112,8 +124,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	mlx = ft_game_init(game_context);
 	ft_get_display_size(game_context);
 	ft_set_elem_size(game_context);
-	mlx_set_window_size(mlx, game_context->game_dimensions->element_size->width * game_context->game_dimensions->map_size->width,
-	game_context->game_dimensions->element_size->height * game_context->game_dimensions->map_size->height);
+	ft_set_window_size(game_context);
 	game_context->game_images = ft_load_graphics(mlx);
 	ft_render_game_map(mlx, game_context);
 	mlx_key_hook(mlx, &on_key_press, (void *) game_context);
