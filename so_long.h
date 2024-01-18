@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 20:03:41 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/18 23:07:26 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,4 +154,5 @@ void				ft_handle_w_key_press(t_game_context *game);
 void				ft_handle_s_key_press(t_game_context *game);
 void				ft_handle_a_key_press(t_game_context *game);
 void				ft_handle_d_key_press(t_game_context *game);
+char				**ft_load_map_v1(char *map_path);
 #endif
