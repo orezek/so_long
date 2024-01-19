@@ -38,7 +38,8 @@ $(LIBFT):
 
 # MLX42 build process - call makefile to build a static MLX42 library
 $(MLX42):
-	make -C $(MLX_DIR)
+	@cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
+	#make -C $(MLX_DIR)
 
 # Clean rule
 clean:
