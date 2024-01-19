@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 23:22:23 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:19:04 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,31 +74,6 @@ void	ft_get_map_size(t_game_context *game)
 		}
 		game->game_dimensions->map_size->height++;
 		temp_map++;
-	}
-}
-
-void	ft_read_line(int fd, char **map_str)
-{
-	char	*tmp_ptr;
-	char	*line;
-
-	line = NULL;
-	tmp_ptr = NULL;
-	line = ft_get_next_line(fd);
-	while (line)
-	{
-		tmp_ptr = *map_str;
-		*map_str = ft_strjoin(tmp_ptr, line);
-		if (!map_str)
-		{
-			free(line);
-			free(tmp_ptr);
-			free(map_str);
-			perror("Error: Map lines error\n");
-		}
-		free(line);
-		free(tmp_ptr);
-		line = ft_get_next_line(fd);
 	}
 }
 

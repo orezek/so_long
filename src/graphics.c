@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:19:20 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 15:33:38 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:30:17 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@ t_game_images	*ft_load_images(mlx_t *mlx, t_game_textures *game_textures)
 	return (game_assets);
 }
 
-void	ft_resize_assets(t_game_images *game_images, t_elem_size *elem_size)
-{
-	mlx_resize_image(game_images->player, elem_size->width, elem_size->height);
-	mlx_resize_image
-		(game_images->collectible, elem_size->width, elem_size->height);
-	mlx_resize_image(game_images->wall, elem_size->width, elem_size->height);
-	mlx_resize_image(game_images->exit, elem_size->width, elem_size->height);
-}
-
 void	ft_del_textures(t_game_textures *game_textures)
 {
 	mlx_delete_texture(game_textures->player);
@@ -72,12 +63,12 @@ t_game_images	*ft_load_graphics(mlx_t *mlx)
 
 void	ft_set_elem_size(t_game_context *game_context)
 {
-	t_elem_size 	*elem_size;
+	t_elem_size		*elem_size;
 	t_map_size		*map_size;
 	t_display_size	*display_size;
 
-	if (!game_context->game_dimensions->map_size ||
-	!game_context->game_dimensions->display_size)
+	if (!game_context->game_dimensions->map_size
+		|| !game_context->game_dimensions->display_size)
 		exit(1);
 	elem_size = malloc(sizeof(t_elem_size));
 	if (!elem_size)
