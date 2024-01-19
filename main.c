@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/18 23:20:35 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:33:06 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,6 @@ void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 		}
 		close(fd);
 	}
-}
-
-void	ft_get_display_size(t_game_context *game_context)
-{
-	mlx_get_monitor_size(0, &game_context->game_dimensions->display_size->width,
-		&game_context->game_dimensions->display_size->height);
-}
-
-void	ft_set_window_size(t_game_context *game_context)
-{
-	int32_t	width;
-	int32_t	height;
-
-	width = 0;
-	height = 0;
-
-	width = game_context->game_dimensions->element_size->width *
-		game_context->game_dimensions->map_size->width;
-	height = game_context->game_dimensions->element_size->height *
-		game_context->game_dimensions->map_size->height;
-
-	if (!game_context->mlx)
-		exit(1);
-	mlx_set_window_size(game_context->mlx, width, height);
 }
 
 int32_t	main(int32_t argc, const char *argv[])

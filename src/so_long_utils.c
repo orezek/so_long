@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:18:37 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/19 20:29:34 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:32:52 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,26 @@ void	ft_resize_assets(t_game_images *game_images, t_elem_size *elem_size)
 		(game_images->collectible, elem_size->width, elem_size->height);
 	mlx_resize_image(game_images->wall, elem_size->width, elem_size->height);
 	mlx_resize_image(game_images->exit, elem_size->width, elem_size->height);
+}
+
+void	ft_get_display_size(t_game_context *game_context)
+{
+	mlx_get_monitor_size(0, &game_context->game_dimensions->display_size->width,
+		&game_context->game_dimensions->display_size->height);
+}
+
+void	ft_set_window_size(t_game_context *game_context)
+{
+	int32_t	width;
+	int32_t	height;
+
+	width = 0;
+	height = 0;
+	width = game_context->game_dimensions->element_size->width
+		* game_context->game_dimensions->map_size->width;
+	height = game_context->game_dimensions->element_size->height
+		*game_context->game_dimensions->map_size->height;
+	if (!game_context->mlx)
+		exit(1);
+	mlx_set_window_size(game_context->mlx, width, height);
 }
