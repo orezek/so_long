@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/19 20:33:06 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/19 20:37:53 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_game_init(t_game_context *game_context)
 	game_context->mlx = mlx;
 }
 
-
 void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 {
 	int		fd;
@@ -37,14 +36,13 @@ void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 		ft_putstr_fd("Error: Add valid map to the game! Format *.ber or use default map 'maps/map.ber'!\n", 2);
 		exit(1);
 	}
-	else if(argct > 2)
+	else if (argct > 2)
 	{
 		ft_putstr_fd("Error:To many arguments provided! Add only valid map path!\n", 2);
 		exit(1);
 	}
-	else if(argct == 2)
+	else if (argct == 2)
 	{
-
 		fd = open(argvt[1], O_RDONLY, 0444);
 		if (fd == -1)
 		{
@@ -52,7 +50,6 @@ void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 			close(fd);
 			exit(1);
 		}
-
 		if (read(fd, buf, 1) == 0)
 		{
 			ft_putstr_fd("Error: File is empty. Check the file!\n", 2);
@@ -99,4 +96,3 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_release_game_resources(game_context);
 	return (EXIT_SUCCESS);
 }
-
