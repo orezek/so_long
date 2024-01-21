@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 21:18:26 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 15:25:57 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 08:36:11 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,33 @@ t_player_position	*ft_get_player_position(char **map)
 		y++;
 	}
 	return (NULL);
+}
+
+void	ft_get_player_position_v1(t_game_context *game)
+{
+	int					x;
+	int					y;
+	t_player_position	*player_position;
+
+	player_position = malloc(sizeof(t_player_position));
+	if (!player_position)
+		exit(1);
+	y = 0;
+	while (game->map->original_map[y] != NULL)
+	{
+		x = 0;
+		while (game->map->original_map[y][x] != '\0')
+		{
+			if (game->map->original_map[y][x] == 'P')
+			{
+				player_position->y = y;
+				player_position->x = x;
+				game->player->player_position = player_position;
+			}
+			x++;
+		}
+		y++;
+	}
 }
 
 int32_t	ft_map_char_count(char **map, char char_to_search)
