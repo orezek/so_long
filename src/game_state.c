@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 21:18:26 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/21 08:40:52 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 08:52:01 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_get_player_position(t_game_context *game)
 	int					x;
 	int					y;
 	t_player_position	*player_position;
-
+	game->player = malloc(sizeof(t_player));
 	player_position = malloc(sizeof(t_player_position));
 	if (!player_position)
 		exit(1);

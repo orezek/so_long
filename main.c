@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 08:40:10 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 08:52:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_validate_map_dimensions(game_context->map->original_map);
 	ft_check_map_boundary(game_context->map->original_map);
 	ft_duplicate_map(game_context);
-	game_context->player = malloc(sizeof(t_player));
 	ft_get_player_position(game_context);
 	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
 	ft_verify_game_map(game_context->map->original_map, game_context->map->flooded_map);
