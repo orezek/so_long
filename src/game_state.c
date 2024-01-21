@@ -6,13 +6,13 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 21:18:26 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/21 08:52:01 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 09:46:57 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-t_exit_position	*ft_get_exit_position(char **map)
+void	ft_get_exit_position(t_game_context *game)
 {
 	int				x;
 	int				y;
@@ -20,32 +20,31 @@ t_exit_position	*ft_get_exit_position(char **map)
 
 	exit_position = malloc(sizeof(t_player_position));
 	if (!exit_position)
-		return (NULL);
+		exit(1);
 	y = 0;
-	while (map[y] != NULL)
+	while (game->map->original_map[y] != NULL)
 	{
 		x = 0;
-		while (map[y][x] != '\0')
+		while (game->map->original_map[y][x] != '\0')
 		{
-			if (map[y][x] == 'E')
+			if (game->map->original_map[y][x] == 'E')
 			{
 				exit_position->y = y;
 				exit_position->x = x;
-				return (exit_position);
+				game->exit_position = exit_position;
 			}
 			x++;
 		}
 		y++;
 	}
-	return (NULL);
 }
-
 
 void	ft_get_player_position(t_game_context *game)
 {
 	int					x;
 	int					y;
 	t_player_position	*player_position;
+
 	game->player = malloc(sizeof(t_player));
 	player_position = malloc(sizeof(t_player_position));
 	if (!player_position)

@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 08:40:26 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 09:43:11 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void				ft_release_game_resources(t_game_context *game_context);
 void				ft_get_player_position(t_game_context *game);
 void				ft_count_collectibles(t_game_context *game_context);
 int					ft_check_collectibles(t_game_context *game_context);
-t_exit_position		*ft_get_exit_position(char **map);
 int					ft_end_game(t_game_context *game_context);
 void				ft_get_display_size(t_game_context *game_context);
 void				*ft_duplicate_map(t_game_context *game_context);
@@ -156,4 +155,5 @@ void				ft_handle_d_key_press(t_game_context *game);
 char				**ft_load_map(char *map_path);
 void				ft_read_line(int fd, char **map_str);
 void				ft_set_window_size(t_game_context *game_context);
+void				ft_get_exit_position(t_game_context *game);
 #endif

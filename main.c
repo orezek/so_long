@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 09:30:32 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 09:42:46 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
 	ft_verify_game_map(game_context->map->original_map, game_context->map->flooded_map);
 	game_context->player->player_moves = 0;
-	game_context->exit_position = ft_get_exit_position(game_context->map->original_map);
+	ft_get_exit_position(game_context);
 	ft_get_map_size(game_context);
 	ft_count_collectibles(game_context);
 	ft_game_init(game_context);
