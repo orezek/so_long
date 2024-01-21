@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 21:18:26 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/21 09:46:57 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 23:18:30 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_get_exit_position(t_game_context *game)
 		y++;
 	}
 }
-
+// implement clean up for this function
 void	ft_get_player_position(t_game_context *game)
 {
 	int					x;
