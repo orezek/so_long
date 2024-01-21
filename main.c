@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 22:11:18 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 22:13:35 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
+void	ft_error(char *error_str)
+{
+	ft_putstr_fd(error_str, 2);
+	exit (1);
+}
 
 void	ft_window_init(t_game_context *game_context)
 {
