@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 10:03:43 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 11:08:46 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_game_context_init(t_game_context *game_context)
 	ft_verify_game_map(game_context->map->original_map,
 		game_context->map->flooded_map);
 	game_context->player->player_moves = 0;
+	// above is mamp validation - need to release resource if the validation fails
 	ft_get_exit_position(game_context);
 	ft_get_map_size(game_context);
 	ft_count_collectibles(game_context);
@@ -76,8 +77,9 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_check_program_arguments(argc, argv);
 	ft_check_file_name((char *)argv[1]);
 	map = ft_load_map((char *)argv[1]);
-	game_context = allocate_mem(game_context);
+	game_context = allocate_mem(game_context); //game_context, map, game_dimmensions, display_size
 	game_context->map->original_map = map;
+	// up here no leaks when the game exits, only handle frees in errors in game_context_init
 	ft_game_context_init(game_context);
 	mlx_key_hook(game_context->mlx, &on_key_press, (void *) game_context);
 	mlx_resize_hook(game_context->mlx,
