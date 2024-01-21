@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 08:19:48 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 08:28:14 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,7 @@ void	ft_game_init(t_game_context *game_context)
 	game_context->mlx = mlx;
 }
 
-void	ft_check_program_arguments(int32_t argct, const char *argvt[])
-{
-	int		fd;
-	char	buf[1];
-
-	ft_memset(buf, 0, sizeof(buf));
-	if (argct == 1)
-		ft_print_error("Error: Add valid map to the game '*.ber'.\n" );
-	else if (argct > 2)
-		ft_print_error("Error: To many arguments provided!\n");
-	else if (argct == 2)
-	{
-		fd = open(argvt[1], O_RDONLY, 0444);
-		if (fd == -1)
-		{
-			perror("Error: File name or path is not valid!\n");
-			close(fd);
-			exit(1);
-		}
-		if (read(fd, buf, 1) == 0)
-		{
-			ft_putstr_fd("Error: File is empty. Check the file!\n", 2);
-			close(fd);
-			exit(1);
-		}
-		close(fd);
-	}
-}
+// void	ft_map_init(int32)
 
 int32_t	main(int32_t argc, const char *argv[])
 {
