@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 09:42:46 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 09:56:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,8 @@ t_game_context	*allocate_mem(t_game_context *game)
 	return (game);
 }
 
-int32_t	main(int32_t argc, const char *argv[])
+void	ft_game_context_init(t_game_context *game_context)
 {
-	t_game_context	*game_context;
-	char			**map;
-
-	ft_check_program_arguments(argc, argv);
-	ft_check_file_name((char *)argv[1]);
-	map = ft_load_map((char *)argv[1]);
-	game_context = allocate_mem(game_context);
-	game_context->map->original_map = map;
 	ft_validate_map_dimensions(game_context->map->original_map);
 	ft_check_map_boundary(game_context->map->original_map);
 	ft_duplicate_map(game_context);
@@ -68,6 +60,19 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_set_window_size(game_context);
 	game_context->game_images = ft_load_graphics(game_context->mlx);
 	ft_render_game_map(game_context);
+}
+
+int32_t	main(int32_t argc, const char *argv[])
+{
+	t_game_context	*game_context;
+	char			**map;
+
+	ft_check_program_arguments(argc, argv);
+	ft_check_file_name((char *)argv[1]);
+	map = ft_load_map((char *)argv[1]);
+	game_context = allocate_mem(game_context);
+	game_context->map->original_map = map;
+	ft_game_context_init(game_context);
 	mlx_key_hook(game_context->mlx, &on_key_press, (void *) game_context);
 	mlx_resize_hook(game_context->mlx, &on_window_resize, (void *) game_context);
 	mlx_loop(game_context->mlx);
