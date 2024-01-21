@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 22:13:35 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 23:01:01 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_game_context_init(t_game_context *game_context)
 	player_pos_x = game_context->player->player_position->x;
 	ft_map_flood(game_context->map->flooded_map, player_pos_y, player_pos_x);
 	ft_verify_game_map(game_context->map->original_map,
-		game_context->map->flooded_map);
+		game_context->map->flooded_map, game_context);
 	game_context->player->player_moves = 0;
 	ft_get_exit_position(game_context);
 	ft_get_map_size(game_context);

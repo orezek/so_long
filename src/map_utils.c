@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/21 22:33:02 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 23:03:29 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 	ft_map_flood(map_to_flood, y, x - 1);
 }
 
-void	ft_verify_game_map(char **loaded_map, char **flooded_map)
+void	ft_verify_game_map(char **loaded_map, char **flooded_map, t_game_context *game)
 {
 	if (!loaded_map && !flooded_map)
 	{
@@ -43,18 +43,18 @@ void	ft_verify_game_map(char **loaded_map, char **flooded_map)
 		&& ft_map_char_count(flooded_map, 'e') == 1)
 		ft_putstr_fd("Success: Single exit is reachable.\n", 1);
 	else
-		ft_putstr_fd("Error: Exit is either not reachable or missing.\n", 1);
+		ft_clean_memory(game, "Error: Exit is either not reachable or missing.\n");
 	if (ft_map_char_count(loaded_map, 'P') == 1
 		&& ft_map_char_count(flooded_map, 'p') == 1)
 		ft_putstr_fd("Success: One player found and can reach the exit.\n", 1);
 	else
-		ft_putstr_fd("Error: Not valid path to the exit.\n", 1);
+		ft_clean_memory(game, "Error: Not valid path to the exit.\n");
 	if (ft_map_char_count(loaded_map, 'C') >= 1
 		&& ft_map_char_count(loaded_map, 'C')
 		== ft_map_char_count(flooded_map, 'c'))
 		ft_putstr_fd("Success: All collectibles are valid and reachable.\n", 1);
 	else
-		ft_putstr_fd("Error: some collectibles are not reachable\n", 1);
+		ft_clean_memory(game, "Error: some collectibles are not reachable\n");
 }
 
 int32_t	ft_validate_map_dimensions(char **map)
