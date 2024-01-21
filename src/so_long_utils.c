@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 20:18:37 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/21 08:22:10 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 10:31:00 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ void	ft_check_program_arguments(int32_t argct, const char *argvt[])
 	if (argct == 1)
 		ft_print_error("Error: Add valid map to the game '*.ber'.\n" );
 	else if (argct > 2)
-		ft_print_error("Error: To many arguments provided!\n");
+		ft_print_error("Error: To many arguments. Add map path only!\n");
 	else if (argct == 2)
 	{
 		fd = open(argvt[1], O_RDONLY, 0444);
 		if (fd == -1)
 		{
-			perror("Error: File name or path is not valid!\n");
+			perror("Error: File name or path is not valid!");
 			close(fd);
 			exit(1);
 		}

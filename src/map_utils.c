@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 15:55:52 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 10:39:38 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int32_t	ft_check_map_boundary(char **map)
 		y++;
 	}
 	ft_putstr_fd("Success: Map boundaries are properly enclosed.\n", 1);
+	return (0);
 }
 
 int32_t	ft_check_file_name(char *str)

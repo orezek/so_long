@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:31:52 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/18 15:48:05 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 10:42:45 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_free_array(char **array)
 	return (0);
 }
 
-void	*ft_duplicate_map(t_game_context *game_context)
+void	ft_duplicate_map(t_game_context *game_context)
 {
 	char	**map_dup;
 	char	**map;
@@ -40,7 +40,7 @@ void	*ft_duplicate_map(t_game_context *game_context)
 		counter++;
 	map_dup = malloc(sizeof(char *) * (counter + 1));
 	if (!map_dup)
-		return (NULL);
+		exit(1);
 	counter = 0;
 	while (map[counter] != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 10:03:24 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 10:41:55 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void				ft_count_collectibles(t_game_context *game_context);
 int					ft_check_collectibles(t_game_context *game_context);
 int					ft_end_game(t_game_context *game_context);
 void				ft_get_display_size(t_game_context *game_context);
-void				*ft_duplicate_map(t_game_context *game_context);
+void				ft_duplicate_map(t_game_context *game_context);
 void				ft_map_flood(char	**map_to_flood, size_t y, size_t x);
 int32_t				ft_map_char_count(char **map, char char_to_search);
 void				ft_verify_game_map(char **loaded_map, char **flooded_map);
