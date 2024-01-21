@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/21 22:24:01 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 22:33:02 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int32_t	ft_validate_map_dimensions(char **map)
 		return (1);
 	ref = ft_strlen(map[0]);
 	if (ref < 5)
-		ft_print_error("Error: Map validation failed. Missing columns\n", map);
+		ft_print_error("Error: Map validation failed. Missing columns!\n", map);
 	map_ptr = map;
 	while (*map_ptr)
 	{
@@ -80,9 +80,9 @@ int32_t	ft_validate_map_dimensions(char **map)
 		map_ptr++;
 	}
 	if (row_counter < 3)
-		ft_print_error("Error: Map validation failed. Not enough rows!", map);
+		ft_print_error("Error: Map validation failed. Missing rows!\n", map);
 	ft_putstr_fd
-	("Success: Map validation succeeded, map is correctly rectangular.\n", 1);
+	("Success: Map validation succeeded, map is rectangular.\n", 1);
 	return (0);
 }
 
@@ -100,14 +100,14 @@ int32_t	ft_check_map_boundary(char **map)
 			while (map[y][x])
 			{
 				if (map[y][x] != '1')
-					ft_print_error("Error: Map boundary issue.\n", map);
+					ft_print_error("Error: Check map borders\n", map);
 				x++;
 			}
 		}
 		else
 		{
 			if (map[y][0] != '1' || map[y][ft_strlen(map[y]) - 1] != '1')
-				ft_print_error("Error: Map boundary issue.\n", map);
+				ft_print_error("Error: Check map borders\n", map);
 		}
 		y++;
 	}
