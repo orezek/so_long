@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 09:57:24 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 10:03:24 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ t_game_textures		*ft_load_textures(void);
 void				ft_del_textures(t_game_textures *game_textures);
 void				ft_set_elem_size(t_game_context *game_context);
 t_game_images		*ft_load_graphics(mlx_t *mlx);
-void				ft_game_init(t_game_context *game_context);
+void				ft_window_init(t_game_context *game_context);
 int					ft_free_array(char **array);
 void				on_key_press(mlx_key_data_t k_data, void *param);
 void				on_window_resize(int32_t width, int32_t height,

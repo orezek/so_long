@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 09:56:55 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 10:03:43 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void	ft_game_init(t_game_context *game_context)
+void	ft_window_init(t_game_context *game_context)
 {
 	mlx_t	*mlx;
 
@@ -44,17 +44,23 @@ t_game_context	*allocate_mem(t_game_context *game)
 
 void	ft_game_context_init(t_game_context *game_context)
 {
+	int32_t	player_pos_y;
+	int32_t	player_pos_x;
+
 	ft_validate_map_dimensions(game_context->map->original_map);
 	ft_check_map_boundary(game_context->map->original_map);
 	ft_duplicate_map(game_context);
 	ft_get_player_position(game_context);
-	ft_map_flood(game_context->map->flooded_map, game_context->player->player_position->y, game_context->player->player_position->x);
-	ft_verify_game_map(game_context->map->original_map, game_context->map->flooded_map);
+	player_pos_y = game_context->player->player_position->y;
+	player_pos_x = game_context->player->player_position->x;
+	ft_map_flood(game_context->map->flooded_map, player_pos_y, player_pos_x);
+	ft_verify_game_map(game_context->map->original_map,
+		game_context->map->flooded_map);
 	game_context->player->player_moves = 0;
 	ft_get_exit_position(game_context);
 	ft_get_map_size(game_context);
 	ft_count_collectibles(game_context);
-	ft_game_init(game_context);
+	ft_window_init(game_context);
 	ft_get_display_size(game_context);
 	ft_set_elem_size(game_context);
 	ft_set_window_size(game_context);
@@ -74,7 +80,8 @@ int32_t	main(int32_t argc, const char *argv[])
 	game_context->map->original_map = map;
 	ft_game_context_init(game_context);
 	mlx_key_hook(game_context->mlx, &on_key_press, (void *) game_context);
-	mlx_resize_hook(game_context->mlx, &on_window_resize, (void *) game_context);
+	mlx_resize_hook(game_context->mlx,
+		&on_window_resize, (void *) game_context);
 	mlx_loop(game_context->mlx);
 	ft_release_game_resources(game_context);
 	return (EXIT_SUCCESS);
