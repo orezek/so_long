@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 10:41:55 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 22:05:59 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,8 @@ int32_t				ft_validate_map_dimensions(char **map);
 int32_t				ft_check_map_boundary(char **map);
 void				ft_check_program_arguments(int32_t argct,
 						const char *argvt[]);
-void				ft_print_error(char *error_str);
+void				ft_error(char *error_str);
+void				ft_print_error(char *error_str, char **map);
 void				ft_get_map_size(t_game_context *game);
 void				ft_handle_key_press(t_game_context *game);
 void				ft_handle_w_key_press(t_game_context *game);

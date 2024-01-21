@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:24:31 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 19:53:49 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 22:11:18 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int32_t	main(int32_t argc, const char *argv[])
 	ft_check_program_arguments(argc, argv);
 	ft_check_file_name((char *)argv[1]);
 	map = ft_load_map((char *)argv[1]);
-	ft_validate_map_dimensions(game_context->map->original_map);
-	ft_check_map_boundary(game_context->map->original_map);
+	ft_validate_map_dimensions(map);
+	ft_check_map_boundary(map);
 	game_context = allocate_mem(game_context);
 	game_context->map->original_map = map;
 	ft_game_context_init(game_context);
