@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 08:38:15 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/21 08:40:26 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,7 @@ void				on_key_press(mlx_key_data_t k_data, void *param);
 void				on_window_resize(int32_t width, int32_t height,
 						void *param);
 void				ft_release_game_resources(t_game_context *game_context);
-// t_player_position	*ft_get_player_position(char **map);
-void				ft_get_player_position_v1(t_game_context *game);
+void				ft_get_player_position(t_game_context *game);
 void				ft_count_collectibles(t_game_context *game_context);
 int					ft_check_collectibles(t_game_context *game_context);
 t_exit_position		*ft_get_exit_position(char **map);
