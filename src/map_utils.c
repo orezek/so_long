@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/21 23:03:29 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/22 08:47:10 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_verify_game_map(char **loaded_map, char **flooded_map, t_game_context *g
 		&& ft_map_char_count(flooded_map, 'p') == 1)
 		ft_putstr_fd("Success: One player found and can reach the exit.\n", 1);
 	else
-		ft_clean_memory(game, "Error: Not valid path to the exit.\n");
+		ft_clean_memory(game, "Error: Missing or too many players.\n");
 	if (ft_map_char_count(loaded_map, 'C') >= 1
 		&& ft_map_char_count(loaded_map, 'C')
 		== ft_map_char_count(flooded_map, 'c'))
@@ -100,14 +100,14 @@ int32_t	ft_check_map_boundary(char **map)
 			while (map[y][x])
 			{
 				if (map[y][x] != '1')
-					ft_print_error("Error: Check map borders\n", map);
+					ft_print_error("Error: Check map borders.\n", map);
 				x++;
 			}
 		}
 		else
 		{
 			if (map[y][0] != '1' || map[y][ft_strlen(map[y]) - 1] != '1')
-				ft_print_error("Error: Check map borders\n", map);
+				ft_print_error("Error: Check map borders.\n", map);
 		}
 		y++;
 	}

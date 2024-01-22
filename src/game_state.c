@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 21:18:26 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/21 23:18:30 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/22 08:40:52 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	ft_get_player_position(t_game_context *game)
 	t_player_position	*player_position;
 
 	game->player = malloc(sizeof(t_player));
-	player_position = malloc(sizeof(t_player_position));
+	if (!game->player)
+		exit(1);
+	game->player->player_position = malloc(sizeof(t_player_position));
+	player_position = game->player->player_position;
 	if (!player_position)
 		exit(1);
 	y = 0;
@@ -60,11 +63,13 @@ void	ft_get_player_position(t_game_context *game)
 				player_position->y = y;
 				player_position->x = x;
 				game->player->player_position = player_position;
+				return ;
 			}
 			x++;
 		}
 		y++;
 	}
+	ft_clean_memory(game, "Error: No player found.\n");
 }
 
 int32_t	ft_map_char_count(char **map, char char_to_search)
@@ -75,7 +80,7 @@ int32_t	ft_map_char_count(char **map, char char_to_search)
 
 	counter = 0;
 	if (!map)
-		return (perror("Empty map:"), -1);
+		return (perror("Error: Empty map:"), -1);
 	y = 0;
 	while (map[y] != NULL)
 	{
