@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 16:46:40 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/22 08:47:10 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/22 17:08:04 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_map_flood(char	**map_to_flood, size_t y, size_t x)
 	ft_map_flood(map_to_flood, y, x - 1);
 }
 
-void	ft_verify_game_map(char **loaded_map, char **flooded_map, t_game_context *game)
+void	ft_verify_game_map(char **loaded_map, char **flooded_map,
+	t_game_context *game)
 {
 	if (!loaded_map && !flooded_map)
 	{
@@ -43,7 +44,7 @@ void	ft_verify_game_map(char **loaded_map, char **flooded_map, t_game_context *g
 		&& ft_map_char_count(flooded_map, 'e') == 1)
 		ft_putstr_fd("Success: Single exit is reachable.\n", 1);
 	else
-		ft_clean_memory(game, "Error: Exit is either not reachable or missing.\n");
+		ft_clean_memory(game, "Error: Exit is not reachable or missing.\n");
 	if (ft_map_char_count(loaded_map, 'P') == 1
 		&& ft_map_char_count(flooded_map, 'p') == 1)
 		ft_putstr_fd("Success: One player found and can reach the exit.\n", 1);
