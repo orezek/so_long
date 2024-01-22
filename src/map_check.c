@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 20:47:57 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/19 20:19:04 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/22 17:48:06 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,13 @@ char	**ft_load_map(char *map_path)
 	if (fd == -1)
 		return (free(map_str), perror("Error: Map reading failed\n"), NULL);
 	ft_read_line(fd, &map_str);
+	if (map_str[0] == '\n')
+	{
+		free(map_str);
+		close(fd);
+		ft_putstr_fd("Error: Invalid map, starts with '\\n'\n", 2);
+		exit(1);
+	}
 	map = ft_split(map_str, '\n');
 	free(map_str);
 	close(fd);

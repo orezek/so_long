@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:27:03 by aldokezer         #+#    #+#             */
-/*   Updated: 2024/01/21 22:59:36 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/22 17:51:10 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ void				ft_get_display_size(t_game_context *game_context);
 void				ft_duplicate_map(t_game_context *game_context);
 void				ft_map_flood(char	**map_to_flood, size_t y, size_t x);
 int32_t				ft_map_char_count(char **map, char char_to_search);
-void				ft_verify_game_map(char **loaded_map, char **flooded_map, t_game_context *game);
+void				ft_verify_game_map(char **loaded_map,
+						char **flooded_map, t_game_context *game);
 int32_t				ft_check_file_name(char *str);
 int32_t				ft_validate_map_dimensions(char **map);
 int32_t				ft_check_map_boundary(char **map);
@@ -158,5 +159,6 @@ void				ft_read_line(int fd, char **map_str);
 void				ft_set_window_size(t_game_context *game_context);
 void				ft_get_exit_position(t_game_context *game);
 void				ft_game_context_init(t_game_context *game_context);
-void				ft_clean_memory(t_game_context *game_context, char *error_str);
+void				ft_clean_memory(t_game_context *game_context,
+						char *error_str);
 #endif

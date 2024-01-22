@@ -6,7 +6,7 @@
 /*   By: orezek <orezek@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 21:18:26 by orezek            #+#    #+#             */
-/*   Updated: 2024/01/22 17:07:35 by orezek           ###   ########.fr       */
+/*   Updated: 2024/01/22 17:14:09 by orezek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,10 @@ void	ft_get_player_position(t_game_context *game)
 {
 	int					x;
 	int					y;
-	t_player_position	*player_position;
 
 	game->player = malloc(sizeof(t_player));
-	if (!game->player)
-		exit(1);
 	game->player->player_position = malloc(sizeof(t_player_position));
-	player_position = game->player->player_position;
-	if (!player_position)
+	if (!game->player || !game->player->player_position)
 		exit(1);
 	y = 0;
 	while (game->map->original_map[y] != NULL)
@@ -60,9 +56,8 @@ void	ft_get_player_position(t_game_context *game)
 		{
 			if (game->map->original_map[y][x] == 'P')
 			{
-				player_position->y = y;
-				player_position->x = x;
-				game->player->player_position = player_position;
+				game->player->player_position->y = y;
+				game->player->player_position->x = x;
 				return ;
 			}
 			x++;
